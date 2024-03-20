@@ -263,14 +263,14 @@ main{
                                     <input type="file" id="campoarchivo2" required>
                                     <span  onclick="subirArchivo2()">2 Hojas</span>
                                 </label>
-                                <!-- <label class="label">
-                                    <input type="file" id="campoarchivactfol" required>
-                                    <span  onclick="subirArchivoactfol()">2 Pag con Fol</span>
-                                </label> -->
-                                
                                 <label class="label">
-                                    <input type="file" id="campoarchivactfol2" required>
-                                    <span  onclick="subirArchivoactfol2()">2 Hojas + Folio</span>
+                                    <input type="file" id="campoarchivactfol" required>
+                                    <span  onclick="subirArchivoactfol()">2 Hojas + Folio</span>
+                                </label>
+                                <label class="label">
+                                    <input type="file" id="campoarchivactfolBC" required>
+                                    <span  onclick="subirArchivoactfolBC()">2 Hojas + Folio</span>
+                                    <h6 style="font-size:xx-small;">BC</h6>
                                 </label>
 
                         </div>
@@ -293,6 +293,11 @@ main{
                                 <input type="file" id="campoarchivodef_fol" required>
                                 <span onclick="subirActadefFol()">2 Hojas + Folio</span>
                             </label>
+                            <label class="label">
+                                <input type="file" id="campoarchivodef_folBC" required>
+                                <span onclick="subirActadefFolBC()">2 Hojas + Folio</span>
+                                <h6 style="font-size:xx-small;">BC</h6>
+                            </label>
                         </div>
                     </div>
                 </a>
@@ -313,6 +318,12 @@ main{
                                 <input type="file" id="campoarchivodivorfol" required>
                                 <span onclick="subirActaDivorFol()">2 Hojas + Folio</span>
                             </label>
+                            <label class="label">
+                                <input type="file" id="campoarchivodivorfolBC" required>
+                                <span onclick="subirActaDivorFolBC()">2 Hojas + Folio</span>
+                                <h6 style="font-size:xx-small;">BC</h6>
+                            </label>
+                            
                         </div>
                     </div>
                 </a>
@@ -336,7 +347,12 @@ main{
                             <label class="label">
                                 <input type="file" id="campoarchivomatrifol2" required>
                                 <span onclick="subirActaMatriFol2()">2 Hojas + Folio</span>
-                                <h6 style="font-size:xx-small;">Baja California</h6>
+                                <h6 style="font-size:xx-small;">BC</h6>
+                            </label>
+                            <label class="label">
+                                <input type="file" id="campoarchivomatrifol2BCS" required>
+                                <span onclick="subirActaMatriFol2BCS()">2 Hojas + Folio</span>
+                                <h6 style="font-size:xx-small;">BC SUR</h6>
                             </label>
                         </div>
                     </div>
@@ -461,6 +477,12 @@ document.getElementById('campoarchivodef_fol').addEventListener('change', functi
     subirActadefFol(archivo);
 });
 // Asocia el manejador de eventos al INPUT FILE
+document.getElementById('campoarchivodef_folBC').addEventListener('change', function (evento) {
+    evento.preventDefault();
+    var archivo = evento.target.files[0];
+    subirActadefFolBC(archivo);
+});
+// Asocia el manejador de eventos al INPUT FILE
 document.getElementById('campoarchivodivor').addEventListener('change', function (evento) {
     evento.preventDefault();
     var archivo = evento.target.files[0];
@@ -471,6 +493,12 @@ document.getElementById('campoarchivodivorfol').addEventListener('change', funct
     evento.preventDefault();
     var archivo = evento.target.files[0];
     subirActaDivorFol(archivo);
+});
+// Asocia el manejador de eventos al INPUT FILE
+document.getElementById('campoarchivodivorfolBC').addEventListener('change', function (evento) {
+    evento.preventDefault();
+    var archivo = evento.target.files[0];
+    subirActaDivorFolBC(archivo);
 });
 
 // Asocia el manejador de eventos al INPUT FILE
@@ -491,10 +519,20 @@ document.getElementById('campoarchivomatrifol2').addEventListener('change', func
     var archivo = evento.target.files[0];
     subirActaMatriFol2(archivo);
 });
+document.getElementById('campoarchivomatrifol2BCS').addEventListener('change', function (evento) {
+    evento.preventDefault();
+    var archivo = evento.target.files[0];
+    subirActaMatriFol2BCS(archivo);
+});
 document.getElementById('campoarchivactfol').addEventListener('change', function (evento) {
     evento.preventDefault();
     var archivo = evento.target.files[0];
     subirArchivoactfol(archivo);
+});
+document.getElementById('campoarchivactfolBC').addEventListener('change', function (evento) {
+    evento.preventDefault();
+    var archivo = evento.target.files[0];
+    subirArchivoactfolBC(archivo);
 });
 document.getElementById('campoarchivactfol2').addEventListener('change', function (evento) {
     evento.preventDefault();
@@ -642,11 +680,16 @@ async function leerTextoPDF(pdfBytes) {
 async function buscarEstadosMexico(pdfBytes) {
     try {
         const estadosMexico = [
-            'AGUASCALIENTES', 'BAJA CALIFORNIA', 'BAJA CALIFORNIA SUR', 'CAMPECHE', 'CHIAPAS', 'CHIHUAHUA',
+            'AGUASCALIENTES', 'SUR', 'CALIFORNIA', 'CAMPECHE', 'CHIAPAS', 'CHIHUAHUA',
             'COAHUILA', 'COLIMA', 'DURANGO', 'GUANAJUATO', 'GUERRERO', 'HIDALGO', 'JALISCO', 'MÉXICO', 'MEXICO',
             'MICHOACAN', 'MORELOS', 'NAYARIT', 'NUEVO LEÓN', 'OAXACA', 'PUEBLA', 'QUERÉTARO', 'QUINTANA ROO',
             'SAN LUIS POTOSÍ', 'SINALOA', 'SONORA', 'TABASCO', 'TAMAULIPAS', 'TLAXCALA', 'VERACRUZ', 'YUCATÁN',
-            'ZACATECAS', 'CDMX', 'CIUDAD DE MEXICO', 'CIUDAD', 'YUCATAN', 'CALIFORNIA'
+            'ZACATECAS', 'CDMX', 'CIUDAD DE MEXICO', 'CIUDAD', 'YUCATAN'
+
+
+
+
+            
         ];
 
         const wordList = await leerTextoPDF(pdfBytes);
@@ -741,7 +784,7 @@ async function subirActadefFol(archivo) {
                     const identificador_modificado = "A" + primeros_dos_digitos + " " + ultimos_siete_digitos;
                     const qrUrl = './assets/images/qr.png';
                     const modifiedPdfBytes2 = await agregarQRyTexto(pdfWithEstadoBytes, qrUrl, curp);
-
+                    console.log('FOLIO:', identificador_modificado);
                     const codUrl = './assets/images/bc.png';
                     const modifiedPdfBytes3 = await agregarCodigoyTexto(modifiedPdfBytes2, codUrl, identificador_modificado);
 
@@ -786,6 +829,89 @@ async function subirActadefFol(archivo) {
 
 
 }
+async function subirActadefFolBC(archivo) {
+    try {
+        // Descargar el archivo original
+        const pdfBytes = await archivo.arrayBuffer();
+
+        // Descargar el fondo
+        const fondoPath = './assets/images/back.png';
+        const fondoBytes = await fetch(fondoPath).then(response => response.arrayBuffer());
+
+        // Agregar el fondo al PDF original
+        const modifiedPdfBytes = await addBackgroundImageToPdf(pdfBytes, fondoBytes);
+
+        // Buscar estados de México en el PDF
+        const foundStates = await buscarEstadosMexico(pdfBytes);
+
+        if (foundStates.length > 0) {
+            console.log('Estados de México encontrados:', foundStates);
+
+            // Usa el primer estado encontrado como nombre del archivo
+            const estado = `./pdf/PDF_estados/${foundStates[0]}.pdf`;
+            console.log(estado);
+            // Agrega una página con el nombre del estado al PDF
+            const pdfWithEstadoBytes = await agregarPaginaEstado(modifiedPdfBytes, estado);
+
+            if (pdfWithEstadoBytes) {
+                // Obtener el CURP del PDF
+                const wordList = await leerTextoPDF(pdfBytes);
+                if (wordList.length >= 6) {
+                    const curp = wordList[7]; // El índice 5 representa el elemento 6
+                    console.log('CURP:', curp);
+                    const identificador_electronico = wordList[27]; // Suponiendo que wordList es un array con palabras
+                    const primeros_dos_digitos = identificador_electronico.substring(0, 2);
+                    const ultimos_siete_digitos = identificador_electronico.substring(identificador_electronico.length - 7);
+
+                    const identificador_modificado = "A" + primeros_dos_digitos + " " + ultimos_siete_digitos;
+                    const qrUrl = './assets/images/qr.png';
+                    const modifiedPdfBytes2 = await agregarQRyTexto(pdfWithEstadoBytes, qrUrl, curp);
+                    console.log('FOLIO:', identificador_modificado);
+                    const codUrl = './assets/images/bc.png';
+                    const modifiedPdfBytes3 = await agregarCodigoyTexto(modifiedPdfBytes2, codUrl, identificador_modificado);
+
+                    // Convertir el PDF modificado con el estado en un Blob
+                    const modifiedBlob = new Blob([modifiedPdfBytes3], { type: 'application/pdf' });
+
+                    // Nombre del archivo PDF basado en el CURP
+                    const archivoName = curp + '.pdf';
+
+                    // Crear una referencia al lugar donde se guardará el archivo en Firebase
+                    var refStorage = firebase.storage().ref('Actas').child(archivoName);
+
+                    // Comienza la tarea de carga
+                    var uploadTask = refStorage.put(modifiedBlob);
+
+                    // Maneja el progreso y finalización de la carga
+                    uploadTask.on('state_changed',
+                        null,
+                        function (error) {
+                            console.log('Error al subir el archivo', error);
+                        },
+                        function () {
+                            console.log('Subida completada');
+                            mostrarMensajeFinal(uploadTask.snapshot.downloadURL, uploadTask.snapshot.totalBytes, curp);
+                            const elementoInfo = document.getElementById("info");
+                            // Cambia el contenido del elemento
+                            elementoInfo.textContent = curp;
+                        }
+                    );
+                } else {
+                    console.error('No se encontró el CURP en la lista de palabras.');
+                }
+            } else {
+                console.error('Error al agregar el nombre del estado al PDF.');
+            }
+        } else {
+            console.log('No se encontraron estados de México en el PDF.');
+        }
+    } catch (error) {
+        console.error('Error al procesar el archivo:', error);
+    }
+
+
+}
+
 async function subirActaMatriFol(archivo) {
     try {
         // Descargar el archivo original
@@ -824,7 +950,7 @@ async function subirActaMatriFol(archivo) {
                     const identificador_modificado = "A" + primeros_dos_digitos + " " + ultimos_siete_digitos;
                     const qrUrl = './assets/images/qr.png';
                     const modifiedPdfBytes2 = await agregarQRyTexto(pdfWithEstadoBytes, qrUrl, curp);
-
+                    console.log('FOLIO:', identificador_modificado);
                     const codUrl = './assets/images/bc.png';
                     const modifiedPdfBytes3 = await agregarCodigoyTexto(modifiedPdfBytes2, codUrl, identificador_modificado);
 
@@ -908,7 +1034,7 @@ async function subirActaMatriFol2(archivo) {
                     const identificador_modificado = "A" + primeros_dos_digitos + " " + ultimos_siete_digitos;
                     const qrUrl = './assets/images/qr.png';
                     const modifiedPdfBytes2 = await agregarQRyTexto(pdfWithEstadoBytes, qrUrl, curp);
-
+                    console.log('FOLIO:', identificador_modificado);
                     const codUrl = './assets/images/bc.png';
                     const modifiedPdfBytes3 = await agregarCodigoyTexto(modifiedPdfBytes2, codUrl, identificador_modificado);
 
@@ -953,7 +1079,89 @@ async function subirActaMatriFol2(archivo) {
 
 
 }
+async function subirActaMatriFol2BCS(archivo) {
+    try {
+        // Descargar el archivo original
+        const pdfBytes = await archivo.arrayBuffer();
 
+        // Descargar el fondo
+        const fondoPath = './assets/images/back.png';
+        const fondoBytes = await fetch(fondoPath).then(response => response.arrayBuffer());
+
+        // Agregar el fondo al PDF original
+        const modifiedPdfBytes = await addBackgroundImageToPdf(pdfBytes, fondoBytes);
+
+        // Buscar estados de México en el PDF
+        const foundStates = await buscarEstadosMexico(pdfBytes);
+
+        if (foundStates.length > 0) {
+            console.log('Estados de México encontrados:', foundStates);
+
+            // Usa el primer estado encontrado como nombre del archivo
+            const estado = `./pdf/PDF_estados/${foundStates[0]}.pdf`;
+            console.log(estado);
+            // Agrega una página con el nombre del estado al PDF
+            const pdfWithEstadoBytes = await agregarPaginaEstado(modifiedPdfBytes, estado);
+
+            if (pdfWithEstadoBytes) {
+                // Obtener el CURP del PDF
+                const wordList = await leerTextoPDF(pdfBytes);
+                if (wordList.length >= 6) {
+                    const curp = wordList[8]; // El índice 5 representa el elemento 6
+                    console.log('CURP:', curp);
+
+                    const identificador_electronico = wordList[24];
+                    const primeros_dos_digitos = identificador_electronico.substring(0, 2);
+                    const ultimos_siete_digitos = identificador_electronico.substring(identificador_electronico.length - 7);
+
+                    const identificador_modificado = "A" + primeros_dos_digitos + " " + ultimos_siete_digitos;
+                    const qrUrl = './assets/images/qr.png';
+                    const modifiedPdfBytes2 = await agregarQRyTexto(pdfWithEstadoBytes, qrUrl, curp);
+                    console.log('FOLIO:', identificador_modificado);
+                    const codUrl = './assets/images/bc.png';
+                    const modifiedPdfBytes3 = await agregarCodigoyTexto(modifiedPdfBytes2, codUrl, identificador_modificado);
+
+                    // Convertir el PDF modificado con el estado en un Blob
+                    const modifiedBlob = new Blob([modifiedPdfBytes3], { type: 'application/pdf' });
+
+                    // Nombre del archivo PDF basado en el CURP
+                    const archivoName = curp + '.pdf';
+
+                    // Crear una referencia al lugar donde se guardará el archivo en Firebase
+                    var refStorage = firebase.storage().ref('Actas').child(archivoName);
+
+                    // Comienza la tarea de carga
+                    var uploadTask = refStorage.put(modifiedBlob);
+
+                    // Maneja el progreso y finalización de la carga
+                    uploadTask.on('state_changed',
+                        null,
+                        function (error) {
+                            console.log('Error al subir el archivo', error);
+                        },
+                        function () {
+                            console.log('Subida completada');
+                            mostrarMensajeFinal(uploadTask.snapshot.downloadURL, uploadTask.snapshot.totalBytes, curp);
+                            const elementoInfo = document.getElementById("info");
+                            // Cambia el contenido del elemento
+                            elementoInfo.textContent = curp;
+                        }
+                    );
+                } else {
+                    console.error('No se encontró el CURP en la lista de palabras.');
+                }
+            } else {
+                console.error('Error al agregar el nombre del estado al PDF.');
+            }
+        } else {
+            console.log('No se encontraron estados de México en el PDF.');
+        }
+    } catch (error) {
+        console.error('Error al procesar el archivo:', error);
+    }
+
+
+}
 async function subirActaDivorFol(archivo) {
     try {
         // Descargar el archivo original
@@ -992,10 +1200,92 @@ async function subirActaDivorFol(archivo) {
                     const identificador_modificado = "A" + primeros_dos_digitos + " " + ultimos_siete_digitos;
                     const qrUrl = './assets/images/qr.png';
                     const modifiedPdfBytes2 = await agregarQRyTexto(pdfWithEstadoBytes, qrUrl, curp);
-
+                    console.log('FOLIO:', identificador_modificado);
                     const codUrl = './assets/images/bc.png';
                     const modifiedPdfBytes3 = await agregarCodigoyTexto(modifiedPdfBytes2, codUrl, identificador_modificado);
+                    // Convertir el PDF modificado con el estado en un Blob
+                    const modifiedBlob = new Blob([modifiedPdfBytes3], { type: 'application/pdf' });
 
+                    // Nombre del archivo PDF basado en el CURP
+                    const archivoName = curp + '.pdf';
+
+                    // Crear una referencia al lugar donde se guardará el archivo en Firebase
+                    var refStorage = firebase.storage().ref('Actas').child(archivoName);
+
+                    // Comienza la tarea de carga
+                    var uploadTask = refStorage.put(modifiedBlob);
+
+                    // Maneja el progreso y finalización de la carga
+                    uploadTask.on('state_changed',
+                        null,
+                        function (error) {
+                            console.log('Error al subir el archivo', error);
+                        },
+                        function () {
+                            console.log('Subida completada');
+                            mostrarMensajeFinal(uploadTask.snapshot.downloadURL, uploadTask.snapshot.totalBytes, curp);
+                            const elementoInfo = document.getElementById("info");
+                            // Cambia el contenido del elemento
+                            elementoInfo.textContent = curp;
+                        }
+                    );
+                } else {
+                    console.error('No se encontró el CURP en la lista de palabras.');
+                }
+            } else {
+                console.error('Error al agregar el nombre del estado al PDF.');
+            }
+        } else {
+            console.log('No se encontraron estados de México en el PDF.');
+        }
+    } catch (error) {
+        console.error('Error al procesar el archivo:', error);
+    }
+
+
+}
+
+async function subirActaDivorFolBC(archivo) {
+    try {
+        // Descargar el archivo original
+        const pdfBytes = await archivo.arrayBuffer();
+
+        // Descargar el fondo
+        const fondoPath = './assets/images/back.png';
+        const fondoBytes = await fetch(fondoPath).then(response => response.arrayBuffer());
+
+        // Agregar el fondo al PDF original
+        const modifiedPdfBytes = await addBackgroundImageToPdf(pdfBytes, fondoBytes);
+
+        // Buscar estados de México en el PDF
+        const foundStates = await buscarEstadosMexico(pdfBytes);
+
+        if (foundStates.length > 0) {
+            console.log('Estados de México encontrados:', foundStates);
+
+            // Usa el primer estado encontrado como nombre del archivo
+            const estado = `./pdf/PDF_estados/${foundStates[0]}.pdf`;
+            console.log(estado);
+            // Agrega una página con el nombre del estado al PDF
+            const pdfWithEstadoBytes = await agregarPaginaEstado(modifiedPdfBytes, estado);
+
+            if (pdfWithEstadoBytes) {
+                // Obtener el CURP del PDF
+                const wordList = await leerTextoPDF(pdfBytes);
+                if (wordList.length >= 6) {
+                    const curp = wordList[9]; // El índice 5 representa el elemento 6
+                    console.log('CURP:', curp);
+
+                    const identificador_electronico = wordList[27];
+                    const primeros_dos_digitos = identificador_electronico.substring(0, 2);
+                    const ultimos_siete_digitos = identificador_electronico.substring(identificador_electronico.length - 7);
+
+                    const identificador_modificado = "A" + primeros_dos_digitos + " " + ultimos_siete_digitos;
+                    const qrUrl = './assets/images/qr.png';
+                    const modifiedPdfBytes2 = await agregarQRyTexto(pdfWithEstadoBytes, qrUrl, curp);
+                    console.log('FOLIO:', identificador_modificado);
+                    const codUrl = './assets/images/bc.png';
+                    const modifiedPdfBytes3 = await agregarCodigoyTexto(modifiedPdfBytes2, codUrl, identificador_modificado);
                     // Convertir el PDF modificado con el estado en un Blob
                     const modifiedBlob = new Blob([modifiedPdfBytes3], { type: 'application/pdf' });
 
@@ -1065,21 +1355,20 @@ async function subirArchivoactfol2(archivo) {
             if (pdfWithEstadoBytes) {
                 // Obtener el CURP del PDF
                 const wordList = await leerTextoPDF(pdfBytes);
-                if (wordList.length >= 6) {
-                    const curp = wordList[6]; // El índice 5 representa el elemento 6
+                if (wordList.length >= 7) {
+                    const curp = wordList[7]; // El índice 5 representa el elemento 6
                     console.log('CURP:', curp);
 
-                    const identificador_electronico = wordList[27];
+                    const identificador_electronico = wordList[26];
                     const primeros_dos_digitos = identificador_electronico.substring(0, 2);
                     const ultimos_siete_digitos = identificador_electronico.substring(identificador_electronico.length - 7);
 
                     const identificador_modificado = "A" + primeros_dos_digitos + " " + ultimos_siete_digitos;
                     const qrUrl = './assets/images/qr.png';
                     const modifiedPdfBytes2 = await agregarQRyTexto(pdfWithEstadoBytes, qrUrl, curp);
-
+                    console.log('FOLIO:', identificador_modificado);
                     const codUrl = './assets/images/bc.png';
                     const modifiedPdfBytes3 = await agregarCodigoyTexto(modifiedPdfBytes2, codUrl, identificador_modificado);
-
                     // Convertir el PDF modificado con el estado en un Blob
                     const modifiedBlob = new Blob([modifiedPdfBytes3], { type: 'application/pdf' });
 
@@ -1502,13 +1791,22 @@ async function subirArchivoactfol(archivo) {
             if (pdfWithEstadoBytes) {
                 // Obtener el CURP del PDF
                 const wordList = await leerTextoPDF(pdfBytes);
-                if (wordList.length >= 7) {
-                    const curp = wordList[7]; // El índice 5 representa el elemento 6
+                if (wordList.length >= 6) {
+                    const curp = wordList[6]; // El índice 5 representa el elemento 6
                     console.log('CURP:', curp);
+
+                    const identificador_electronico = wordList[27];
+                    const primeros_dos_digitos = identificador_electronico.substring(0, 2);
+                    const ultimos_siete_digitos = identificador_electronico.substring(identificador_electronico.length - 7);
+
+                    const identificador_modificado = "A" + primeros_dos_digitos + " " + ultimos_siete_digitos;
                     const qrUrl = './assets/images/qr.png';
                     const modifiedPdfBytes2 = await agregarQRyTexto(pdfWithEstadoBytes, qrUrl, curp);
+                    const codUrl = './assets/images/bc.png';
+                    const modifiedPdfBytes3 = await agregarCodigoyTexto(modifiedPdfBytes2, codUrl, identificador_modificado);
+                    console.log('FOLIO:', identificador_modificado);
                     // Convertir el PDF modificado con el estado en un Blob
-                    const modifiedBlob = new Blob([modifiedPdfBytes2], { type: 'application/pdf' });
+                    const modifiedBlob = new Blob([modifiedPdfBytes3], { type: 'application/pdf' });
 
                     // Nombre del archivo PDF basado en el CURP
                     const archivoName = curp + '.pdf';
@@ -1529,9 +1827,8 @@ async function subirArchivoactfol(archivo) {
                             console.log('Subida completada');
                             mostrarMensajeFinal(uploadTask.snapshot.downloadURL, uploadTask.snapshot.totalBytes, curp);
                             const elementoInfo = document.getElementById("info");
-
-                        // Cambia el contenido del elemento
-                        elementoInfo.textContent = curp;
+                            // Cambia el contenido del elemento
+                            elementoInfo.textContent = curp;
                         }
                     );
                 } else {
@@ -1546,6 +1843,91 @@ async function subirArchivoactfol(archivo) {
     } catch (error) {
         console.error('Error al procesar el archivo:', error);
     }
+
+}
+
+//EDICION 03:42
+
+async function subirArchivoactfolBC(archivo) {
+    try {
+        // Descargar el archivo original
+        const pdfBytes = await archivo.arrayBuffer();
+
+        // Descargar el fondo
+        const fondoPath = './assets/images/back.png';
+        const fondoBytes = await fetch(fondoPath).then(response => response.arrayBuffer());
+
+        // Agregar el fondo al PDF original
+        const modifiedPdfBytes = await addBackgroundImageToPdf(pdfBytes, fondoBytes);
+
+        // Buscar estados de México en el PDF
+        const foundStates = await buscarEstadosMexico(pdfBytes);
+
+        if (foundStates.length > 0) {
+            console.log('Estados de México encontrados:', foundStates);
+
+            // Usa el primer estado encontrado como nombre del archivo
+            const estado = `./pdf/PDF_estados/${foundStates[0]}.pdf`;
+            console.log(estado);
+            // Agrega una página con el nombre del estado al PDF
+            const pdfWithEstadoBytes = await agregarPaginaEstado(modifiedPdfBytes, estado);
+
+            if (pdfWithEstadoBytes) {
+                // Obtener el CURP del PDF
+                const wordList = await leerTextoPDF(pdfBytes);
+                if (wordList.length >= 6) {
+                    const curp = wordList[6]; // El índice 5 representa el elemento 6
+                    console.log('CURP:', curp);
+
+                    const identificador_electronico = wordList[26];
+                    const primeros_dos_digitos = identificador_electronico.substring(0, 2);
+                    const ultimos_siete_digitos = identificador_electronico.substring(identificador_electronico.length - 7);
+
+                    const identificador_modificado = "A" + primeros_dos_digitos + " " + ultimos_siete_digitos;
+                    const qrUrl = './assets/images/qr.png';
+                    const modifiedPdfBytes2 = await agregarQRyTexto(pdfWithEstadoBytes, qrUrl, curp);
+                    const codUrl = './assets/images/bc.png';
+                    const modifiedPdfBytes3 = await agregarCodigoyTexto(modifiedPdfBytes2, codUrl, identificador_modificado);
+                    console.log('FOLIO:', identificador_modificado);
+                    // Convertir el PDF modificado con el estado en un Blob
+                    const modifiedBlob = new Blob([modifiedPdfBytes3], { type: 'application/pdf' });
+
+                    // Nombre del archivo PDF basado en el CURP
+                    const archivoName = curp + '.pdf';
+
+                    // Crear una referencia al lugar donde se guardará el archivo en Firebase
+                    var refStorage = firebase.storage().ref('Actas').child(archivoName);
+
+                    // Comienza la tarea de carga
+                    var uploadTask = refStorage.put(modifiedBlob);
+
+                    // Maneja el progreso y finalización de la carga
+                    uploadTask.on('state_changed',
+                        null,
+                        function (error) {
+                            console.log('Error al subir el archivo', error);
+                        },
+                        function () {
+                            console.log('Subida completada');
+                            mostrarMensajeFinal(uploadTask.snapshot.downloadURL, uploadTask.snapshot.totalBytes, curp);
+                            const elementoInfo = document.getElementById("info");
+                            // Cambia el contenido del elemento
+                            elementoInfo.textContent = curp;
+                        }
+                    );
+                } else {
+                    console.error('No se encontró el CURP en la lista de palabras.');
+                }
+            } else {
+                console.error('Error al agregar el nombre del estado al PDF.');
+            }
+        } else {
+            console.log('No se encontraron estados de México en el PDF.');
+        }
+    } catch (error) {
+        console.error('Error al procesar el archivo:', error);
+    }
+
 }
 
 // Muestra un mensaje al finalizar la carga
@@ -1569,49 +1951,3 @@ function mostrarMensajeFinal(url, bytes, archivoName) {
 
 
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-        
