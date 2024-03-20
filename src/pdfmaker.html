@@ -1,0 +1,1617 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recovec</title>
+    <link rel="stylesheet" href="./assets/css/style2.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/test.css">
+    <link rel="icon" href="assets/images/pdf.ico" type="image/x-icon">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"
+        integrity="sha512-z8IYLHO8bTgFqj+yrPyIJnzBDf7DDhWwiEsk4sY+Oe6J2M+WQequeGS7qioI5vT6rXgVRb4K1UVQC5ER7MKzKQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/1.10.100/pdf.min.js"></script>
+        <link rel="stylesheet" href="./assets/js/main2.js">
+        
+<!-- BOOSTRAP CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css">
+<!-- Toastify CSS -->
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+
+</head>
+
+<style>
+    .navbar-logo {
+  width: 25px; /* Ancho de 20 píxeles */
+  height: auto; /* Altura ajustada automáticamente para mantener la proporción */
+  /* Otros estilos para la imagen del logo */
+ 
+  /* Otros estilos para el logo */
+}
+
+
+
+/*PORTADA - COVER*/
+
+main{
+    max-width: 1200px;
+    
+    padding: 40px;
+    margin: auto;
+}
+
+.cover{
+    display: flex;
+    justify-content: center;
+    margin-top: 60px;
+}
+
+.text__information-cover{
+    width: 50%;
+}
+
+.text__information-cover h1{
+    font-size: 50px;
+}
+
+.text__information-cover p{
+    font-size: 18px;
+    margin-top: 40px;
+}
+
+.buttons__cover{
+    display: flex;
+    margin-top: 40px;
+}
+
+.btn__readMore-cover{
+    padding: 14px 40px;
+    border: none;
+    color: black;
+    font-weight: 500;
+    font-size: 16px;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: background 300ms;
+}
+
+.btn__readMore-cover:hover{
+    background: #E8E8E8;
+}
+
+.media__cover{
+    width: 50%;
+}
+
+.media__cover video{
+    width: 100%;
+    margin-top: -40px;
+}
+
+</style>
+<style>
+  /* Define la animación */
+  @keyframes moveH6 {
+    0% { transform: translateX(0); } /* Estado inicial */
+    50% { transform: translateX(20px); } /* Punto intermedio */
+    100% { transform: translateX(0); } /* Estado final */
+  }
+
+  /* Aplica la animación al encabezado h1 */
+  h1 {
+    animation: moveH6 3s infinite; /* 3 segundos de duración, infinitamente repetido */
+    font-family: 'Montserrat', sans-serif;
+  }
+</style>
+
+<!-- Navbar -->
+ <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+    <div class="container">
+      <a class="navbar-brand" href="./index.html">Recovec</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+        aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav ms-auto">
+            <a class="nav-link logged-in" href="#" id="database"><label class="switch"><input type="checkbox" id="switch2" onchange="mostrarOcultarDive()"><span class="slider round"></span></label>   Enviar a base</a>
+            <a class="nav-link logged-in" href="./database.html" id="database"><img    class="navbar-logo" src="./assets/images/anadir.png" alt="X">   Base de datos</a>
+          <a class="nav-link logged-in" href="index.html" id="logout"><img style="width: 25px; height: 25px; margin-right: 10px;" src="./assets/images/login2.png" alt="img login">Cerrar sesion</a>
+          
+
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container p-4">
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+        <ul class="list-group posts">
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          
+          </div>
+        <div class="modal-body p-5">
+          <form id="signup-form">
+
+           
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="signinModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalSignin"
+    aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+            </div>
+        <div class="modal-body">
+          <form id="login-form">
+            
+            
+
+            <button type="button" class="btn btn-info" id="googleLogin"></button>
+            <button type="button" class="btn btn-primary" id="facebookLogin"></button>
+            <button type="button" class="btn btn-dark" id="githubLogin"></button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div> 
+
+<body  style="align-items: center;">
+
+    
+    <form >
+        <div class="main-menu">
+        <a style="width: 50%; height: fit-content; align-items: center;" >
+            <div class="miDiv0" id="miDiv0">
+                <div style="width: 90%; height: fit-content; align-items: center;" class="option">
+                    <img style="width: 50px; height: 50px;" src="./assets/images/pdf.png" alt="">
+                    <p id="info" class="infocurpview" >Info</p> 
+                    <div style="width: 100%; align-items: center;"><h6 id="mensaje" class=""></h6></div>
+                   
+                    
+                </div>
+            </div>
+        </a>
+        
+    </form>
+    <main>
+<style>
+    .infocurpview{
+        
+    border: 1px solid #cccccc;
+    color: #000000;
+    width: 100%;
+    text-decoration: none;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ; 
+    font-size: smaller;
+    }
+    .infocurpview:hover {
+        animation: moveinfocurpview 3s infinite; /* 3 segundos de duración, infinitamente repetido */
+    color: #186112;
+}
+
+
+ /* Define la animación */
+ @keyframes moveinfocurpview {
+    0% { transform: translateX(0); } /* Estado inicial */
+    50% { transform: translateX(10px); } /* Punto intermedio */
+    100% { transform: translateX(0); } /* Estado final */
+  }
+
+
+    
+</style>
+
+
+
+       
+        
+        <script>
+            function mostrarMensaje() {
+                alert("Este proceso aun no esta autorizado");
+            }
+        </script>
+
+
+
+
+
+
+
+
+
+        <form>
+            <div class="main-menu">
+                <a>
+                    <div class="miDiv" id="miDiv">
+                        <div style="height: fit-content;" class="option">
+                            <img src="./assets/images/pdfred2h.png" alt="">
+                            <h6>Acta de nacimiento</h6>
+                            <form action="/form/submit" method="get">
+                                <label class="label">
+                                    <input type="file" id="campoarchivo" required>
+                                    <span onclick="subirArchivo()">1 Hoja</span>
+
+                                </label>
+                                <label class="label">
+                                    <input type="file" id="campoarchivo2" required>
+                                    <span  onclick="subirArchivo2()">2 Hojas</span>
+                                </label>
+                                <!-- <label class="label">
+                                    <input type="file" id="campoarchivactfol" required>
+                                    <span  onclick="subirArchivoactfol()">2 Pag con Fol</span>
+                                </label> -->
+                                
+                                <label class="label">
+                                    <input type="file" id="campoarchivactfol2" required>
+                                    <span  onclick="subirArchivoactfol2()">2 Hojas + Folio</span>
+                                </label>
+
+                        </div>
+                    </div>
+                </a>
+        </form>
+
+        <form>
+            <a>
+                <div class="miDiv2" id="miDiv2">
+                    <div style="height: fit-content;" class="option">
+                        <img src="./assets/images/pdfred2h.png" alt="">
+                        <h6>Acta de defuncion</h6>
+                        <form action="/form/submit" method="get">
+                            <label class="label">
+                                <input type="file" id="campoarchivodef" required>
+                                <span onclick="subirArchivodef()">2 Hojas</span>
+                            </label>
+                            <label class="label">
+                                <input type="file" id="campoarchivodef_fol" required>
+                                <span onclick="subirActadefFol()">2 Hojas + Folio</span>
+                            </label>
+                        </div>
+                    </div>
+                </a>
+        </form>
+
+        <form>
+            <a>
+                <div class="miDiv3" id="miDiv3">
+                    <div style="height: fit-content;" class="option">
+                        <img src="./assets/images/pdfred2h.png" alt="">
+                        <h6>Acta de divorcio</h6>
+                        <form action="/form/submit" method="get">
+                            <label class="label">
+                                <input type="file" id="campoarchivodivor" required>
+                                <span onclick="subirArchivodivor()">2 Hojas</span>
+                            </label>
+                            <label class="label">
+                                <input type="file" id="campoarchivodivorfol" required>
+                                <span onclick="subirActaDivorFol()">2 Hojas + Folio</span>
+                            </label>
+                        </div>
+                    </div>
+                </a>
+        </form>
+
+        <form>
+            <a>
+                <div class="miDiv4" id="miDiv4">
+                    <div style="height: fit-content;" class="option">
+                        <img src="./assets/images/pdfred2h.png" alt="">
+                        <h6>Acta de matrimonio</h6>
+                        <form action="/form/submit" method="get">
+                            <label class="label">
+                                <input type="file" id="campoarchivomatri" required>
+                                <span onclick="subirArchivomatri()">2 Hojas</span>
+                            </label>
+                            <label class="label">
+                                <input type="file" id="campoarchivomatrifol" required>
+                                <span onclick="subirActaMatriFol()">2 Hojas + Folio</span>
+                            </label>
+                            <label class="label">
+                                <input type="file" id="campoarchivomatrifol2" required>
+                                <span onclick="subirActaMatriFol2()">2 Hojas + Folio</span>
+                                <h6 style="font-size:xx-small;">Baja California</h6>
+                            </label>
+                        </div>
+                    </div>
+                </a>
+        </form>
+
+    </main>
+        
+    
+
+
+
+
+        <div class="miDiv5" id="miDiv5" style="display: none; width: auto; height: auto; ">
+            <div style="height: fit-content;" class="option">
+                <img style="width: 35px; height: 35px;" src="./assets/images/download.png" alt="">
+                <h1 class="h4">Inventario</h1>
+
+                <form id="task-form">
+
+                    <input type="text" id="task-title" class="form-control mb-3" class="My First Title"
+                        placeholder="Curp" autofocus />
+
+
+                    <textarea id="task-description" rows="1" class="form-control mb-3" placeholder="Url"
+                        readonly></textarea>
+
+                    <button style="width: 100%;" class="btn btn-primary" id="btn-task-form">Guardar</button>
+                </form>
+            </div>
+        </div>
+
+        <script>
+            function mostrarOcultarDive() {
+            const checkbox = document.getElementById("switch2");
+            const div = document.getElementById("miDiv5");
+        
+            if (checkbox.checked) {
+                div.style.display = "block"; // Mostrar el div
+            } else {
+                div.style.display = "none"; // Ocultar el div
+            }
+        }
+        </script>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    <script src="./assets/js/main2.js" type="module"></script>
+    
+</body>
+
+</html>
+
+
+<!-- Asegúrate de incluir las siguientes bibliotecas en tu proyecto -->
+    <script src="https://cdn.jsdelivr.net/npm/pdf-lib/dist/pdf-lib.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/pdf-lib/dist/pdf-lib.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <script src="./assets/js/indexdatabase.js" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+</div>
+</div>
+
+
+<script>
+    // Mostrar el nombre del archivo seleccionado
+ $('#archivo').change(function () {
+    const fileName = $(this)[0].files[0].name;
+    $('#file-name').text(fileName);
+});
+// Configura tu proyecto de Firebase
+var config = {
+    apiKey: "AIzaSyB8NEiOy0T3hzhuiw-hEEjRhWZUpfs67gU",
+    authDomain: "recovec-a1c3e.firebaseapp.com",
+    databaseURL: "https://recovec-a1c3e-default-rtdb.firebaseio.com",
+    projectId: "recovec-a1c3e",
+    storageBucket: "recovec-a1c3e.appspot.com",
+    messagingSenderId: "515425405950",
+    appId: "1:515425405950:web:6461c15fc433f5acf1ceaf"
+};
+firebase.initializeApp(config);
+
+// Asocia el manejador de eventos al INPUT FILE
+document.getElementById('campoarchivo').addEventListener('change', function (evento) {
+    evento.preventDefault();
+    var archivo = evento.target.files[0];
+    subirArchivo(archivo);
+});
+
+// Asocia el manejador de eventos al INPUT FILE
+document.getElementById('campoarchivo2').addEventListener('change', function (evento) {
+    evento.preventDefault();
+    var archivo = evento.target.files[0];
+    subirArchivo2(archivo);
+    
+});
+
+// Asocia el manejador de eventos al INPUT FILE
+document.getElementById('campoarchivodef').addEventListener('change', function (evento) {
+    evento.preventDefault();
+    var archivo = evento.target.files[0];
+    subirArchivodef(archivo);
+});
+// Asocia el manejador de eventos al INPUT FILE
+document.getElementById('campoarchivodef_fol').addEventListener('change', function (evento) {
+    evento.preventDefault();
+    var archivo = evento.target.files[0];
+    subirActadefFol(archivo);
+});
+// Asocia el manejador de eventos al INPUT FILE
+document.getElementById('campoarchivodivor').addEventListener('change', function (evento) {
+    evento.preventDefault();
+    var archivo = evento.target.files[0];
+    subirArchivodivor(archivo);
+});
+// Asocia el manejador de eventos al INPUT FILE
+document.getElementById('campoarchivodivorfol').addEventListener('change', function (evento) {
+    evento.preventDefault();
+    var archivo = evento.target.files[0];
+    subirActaDivorFol(archivo);
+});
+
+// Asocia el manejador de eventos al INPUT FILE
+document.getElementById('campoarchivomatri').addEventListener('change', function (evento) {
+    evento.preventDefault();
+    var archivo = evento.target.files[0];
+    subirArchivomatri(archivo);
+
+});
+// Asocia el manejador de eventos al INPUT FILE
+document.getElementById('campoarchivomatrifol').addEventListener('change', function (evento) {
+    evento.preventDefault();
+    var archivo = evento.target.files[0];
+    subirActaMatriFol(archivo);
+}); 
+document.getElementById('campoarchivomatrifol2').addEventListener('change', function (evento) {
+    evento.preventDefault();
+    var archivo = evento.target.files[0];
+    subirActaMatriFol2(archivo);
+});
+document.getElementById('campoarchivactfol').addEventListener('change', function (evento) {
+    evento.preventDefault();
+    var archivo = evento.target.files[0];
+    subirArchivoactfol(archivo);
+});
+document.getElementById('campoarchivactfol2').addEventListener('change', function (evento) {
+    evento.preventDefault();
+    var archivo = evento.target.files[0];
+    subirArchivoactfol2(archivo);
+});
+// Función para agregar una imagen de fondo a un PDF
+async function addBackgroundImageToPdf(pdfBytes, imageBytes) {
+    const pdfDoc = await PDFLib.PDFDocument.load(pdfBytes);
+    const pages = pdfDoc.getPages();
+    const image = await pdfDoc.embedPng(imageBytes);
+
+    for (let i = 0; i < pages.length; i++) {
+        const page = pages[i];
+        const { width, height } = page.getSize();
+
+        // Crear una nueva página con la misma configuración
+        const newPage = pdfDoc.addPage([width, height]);
+
+        // Dibujar la imagen de fondo
+        newPage.drawImage(image, {
+            x: 0,
+            y: 0,
+            width: width,
+            height: height,
+        });
+
+        // Dibujar el contenido de la página original sobre la nueva página
+        const contentStream = await pdfDoc.embedPage(page);
+        newPage.drawPage(contentStream, {
+            x: 0,
+            y: 5,
+            width: width,
+            height: height,
+        });
+    }
+
+    // Eliminar las páginas originales
+    for (let i = 0; i < pages.length; i++) {
+        pdfDoc.removePage(0);
+    }
+
+    return pdfDoc.save();
+}
+
+
+async function agregarPaginaEstado(pdfDestinoBytes, pdfFuentePath) {
+    try {
+        const pdfDestino = await PDFLib.PDFDocument.load(pdfDestinoBytes);
+
+        // Usar fetch para cargar el PDF fuente y convertirlo a ArrayBuffer
+        const response = await fetch(pdfFuentePath);
+        if (!response.ok) {
+            throw new Error('Error al cargar el PDF fuente');
+        }
+        const pdfFuenteBytes = await response.arrayBuffer();
+
+        const pdfFuente = await PDFLib.PDFDocument.load(pdfFuenteBytes);
+
+        const pages = await pdfDestino.copyPages(pdfFuente, pdfFuente.getPageIndices());
+        pages.forEach((page) => pdfDestino.addPage(page));
+
+        const pdfBytes = await pdfDestino.save();
+
+        return pdfBytes;
+    } catch (error) {
+        console.error('Error al mezclar los PDFs:', error);
+        throw error; // Propagar el error hacia arriba
+    }
+}
+
+
+
+async function agregarQRyTexto(pdfData, qrUrl, texto) {
+    const pdfDoc = await PDFLib.PDFDocument.load(pdfData);
+
+    // Cargar la imagen del QR
+    const pngImageBytes = await fetch(qrUrl).then(res => res.arrayBuffer());
+    const pngImage = await pdfDoc.embedPng(pngImageBytes);
+    const pngDims = pngImage.scale(0.30); // Ajustar la escala para hacer la imagen más pequeña
+
+    // Agregar la imagen del QR al primer página del PDF en la esquina superior izquierda
+    const firstPage = pdfDoc.getPages()[1];
+    firstPage.drawImage(pngImage, {
+        x: 25, // Ajusta la posición X de la imagen
+        y: firstPage.getHeight() - 25 - pngDims.height, // Ajusta la posición Y de la imagen
+        width: pngDims.width,
+        height: pngDims.height,
+    });
+
+    // Agregar texto debajo del QR
+    firstPage.drawText(texto, {
+        x: 25, // Ajusta la posición X del texto
+        y: firstPage.getHeight() - 85, // Ajusta la posición Y del texto
+        size: 5, // Tamaño de la fuente del texto (más pequeño)
+        font: await pdfDoc.embedFont(PDFLib.StandardFonts.Helvetica),
+        color: PDFLib.rgb(0, 0, 0) // Color del texto (negro)
+    });
+
+    // Obtener el PDF resultante
+    const pdfBytes = await pdfDoc.save();
+
+    return pdfBytes;
+}
+
+
+async function leerTextoPDF(pdfBytes) {
+    try {
+        const wordList = []; // Lista para almacenar las palabras
+
+        const pdf = await PDFJS.getDocument({ data: pdfBytes }).promise;
+        const numPages = pdf.numPages;
+
+        // Itera sobre cada página del PDF
+        for (let i = 1; i <= numPages; i++) {
+            const page = await pdf.getPage(i);
+
+            // Extrae el contenido de texto de la página
+            const textContent = await page.getTextContent();
+            const textItems = textContent.items;
+
+            // Itera sobre cada elemento de texto en la página
+            textItems.forEach(item => {
+                // Divide el texto en palabras
+                const words = item.str.split(/\s+/);
+
+                // Agrega cada palabra a la lista de palabras
+                words.forEach(word => {
+                    if (word.trim() !== '') {
+                        wordList.push(word);
+                    }
+                });
+            });
+        }
+
+        // Retorna la lista de palabras
+        return wordList;
+
+    } catch (error) {
+        console.error('Error al leer el PDF:', error);
+        return []; // En caso de error, retorna una lista vacía
+    }
+}
+
+async function buscarEstadosMexico(pdfBytes) {
+    try {
+        const estadosMexico = [
+            'AGUASCALIENTES', 'BAJA CALIFORNIA', 'BAJA CALIFORNIA SUR', 'CAMPECHE', 'CHIAPAS', 'CHIHUAHUA',
+            'COAHUILA', 'COLIMA', 'DURANGO', 'GUANAJUATO', 'GUERRERO', 'HIDALGO', 'JALISCO', 'MÉXICO', 'MEXICO',
+            'MICHOACAN', 'MORELOS', 'NAYARIT', 'NUEVO LEÓN', 'OAXACA', 'PUEBLA', 'QUERÉTARO', 'QUINTANA ROO',
+            'SAN LUIS POTOSÍ', 'SINALOA', 'SONORA', 'TABASCO', 'TAMAULIPAS', 'TLAXCALA', 'VERACRUZ', 'YUCATÁN',
+            'ZACATECAS', 'CDMX', 'CIUDAD DE MEXICO', 'CIUDAD', 'YUCATAN', 'CALIFORNIA'
+        ];
+
+        const wordList = await leerTextoPDF(pdfBytes);
+
+        // Filtra los estados encontrados en la lista de palabras
+        const foundStates = estadosMexico.filter(estado => wordList.includes(estado));
+
+        return foundStates;
+
+    } catch (error) {
+        console.error('Error al buscar estados de México en el PDF:', error);
+        return [];
+    }
+}
+
+
+async function agregarCodigoyTexto(pdfData, qrUrl, texto) {
+    const pdfDoc = await PDFLib.PDFDocument.load(pdfData);
+
+    // Cargar la imagen del QR
+    const pngImageBytes = await fetch(qrUrl).then(res => res.arrayBuffer());
+    const pngImage = await pdfDoc.embedPng(pngImageBytes);
+    const pngDims = pngImage.scale(0.15); // Ajustar la escala para hacer la imagen más pequeña
+
+    // Agregar la imagen del QR al primer página del PDF en la esquina superior izquierda
+    const firstPage = pdfDoc.getPages()[0];
+    firstPage.drawText("FOLIO",{
+        x: 80, // Ajusta la posición X del texto
+        y: firstPage.getHeight() - 50, // Ajusta la posición Y del texto
+        size: 12, // Tamaño de la fuente del texto (más pequeño)
+        font: await pdfDoc.embedFont(PDFLib.StandardFonts.Helvetica),
+        color: PDFLib.rgb(0, 0, 0) // Color del texto (negro)
+    });
+
+    // Agregar texto del CURP
+    firstPage.drawText(texto, {
+        x: 67, // Ajusta la posición X del texto
+        y: firstPage.getHeight() - 59, // Ajusta la posición Y del texto (debajo del FOLIO)
+        size: 10, // Tamaño de la fuente del texto (más pequeño)
+        font: await pdfDoc.embedFont(PDFLib.StandardFonts.Helvetica),
+        color: PDFLib.rgb(0, 0, 0) // Color del texto (negro)
+    });
+
+    // Agregar la imagen del QR debajo de los textos
+    firstPage.drawImage(pngImage, {
+        x: 50, // Ajusta la posición X de la imagen
+        y: firstPage.getHeight() - 60 - pngDims.height,
+        width: pngDims.width,
+        height: pngDims.height,
+    });
+
+    // Obtener el PDF resultante
+    const pdfBytes = await pdfDoc.save();
+
+    return pdfBytes;
+}
+
+async function subirActadefFol(archivo) {
+    try {
+        // Descargar el archivo original
+        const pdfBytes = await archivo.arrayBuffer();
+
+        // Descargar el fondo
+        const fondoPath = './assets/images/back.png';
+        const fondoBytes = await fetch(fondoPath).then(response => response.arrayBuffer());
+
+        // Agregar el fondo al PDF original
+        const modifiedPdfBytes = await addBackgroundImageToPdf(pdfBytes, fondoBytes);
+
+        // Buscar estados de México en el PDF
+        const foundStates = await buscarEstadosMexico(pdfBytes);
+
+        if (foundStates.length > 0) {
+            console.log('Estados de México encontrados:', foundStates);
+
+            // Usa el primer estado encontrado como nombre del archivo
+            const estado = `./pdf/PDF_estados/${foundStates[0]}.pdf`;
+            console.log(estado);
+            // Agrega una página con el nombre del estado al PDF
+            const pdfWithEstadoBytes = await agregarPaginaEstado(modifiedPdfBytes, estado);
+
+            if (pdfWithEstadoBytes) {
+                // Obtener el CURP del PDF
+                const wordList = await leerTextoPDF(pdfBytes);
+                if (wordList.length >= 6) {
+                    const curp = wordList[7]; // El índice 5 representa el elemento 6
+                    console.log('CURP:', curp);
+                    const identificador_electronico = wordList[28]; // Suponiendo que wordList es un array con palabras
+                    const primeros_dos_digitos = identificador_electronico.substring(0, 2);
+                    const ultimos_siete_digitos = identificador_electronico.substring(identificador_electronico.length - 7);
+
+                    const identificador_modificado = "A" + primeros_dos_digitos + " " + ultimos_siete_digitos;
+                    const qrUrl = './assets/images/qr.png';
+                    const modifiedPdfBytes2 = await agregarQRyTexto(pdfWithEstadoBytes, qrUrl, curp);
+
+                    const codUrl = './assets/images/bc.png';
+                    const modifiedPdfBytes3 = await agregarCodigoyTexto(modifiedPdfBytes2, codUrl, identificador_modificado);
+
+                    // Convertir el PDF modificado con el estado en un Blob
+                    const modifiedBlob = new Blob([modifiedPdfBytes3], { type: 'application/pdf' });
+
+                    // Nombre del archivo PDF basado en el CURP
+                    const archivoName = curp + '.pdf';
+
+                    // Crear una referencia al lugar donde se guardará el archivo en Firebase
+                    var refStorage = firebase.storage().ref('Actas').child(archivoName);
+
+                    // Comienza la tarea de carga
+                    var uploadTask = refStorage.put(modifiedBlob);
+
+                    // Maneja el progreso y finalización de la carga
+                    uploadTask.on('state_changed',
+                        null,
+                        function (error) {
+                            console.log('Error al subir el archivo', error);
+                        },
+                        function () {
+                            console.log('Subida completada');
+                            mostrarMensajeFinal(uploadTask.snapshot.downloadURL, uploadTask.snapshot.totalBytes, curp);
+                            const elementoInfo = document.getElementById("info");
+                            // Cambia el contenido del elemento
+                            elementoInfo.textContent = curp;
+                        }
+                    );
+                } else {
+                    console.error('No se encontró el CURP en la lista de palabras.');
+                }
+            } else {
+                console.error('Error al agregar el nombre del estado al PDF.');
+            }
+        } else {
+            console.log('No se encontraron estados de México en el PDF.');
+        }
+    } catch (error) {
+        console.error('Error al procesar el archivo:', error);
+    }
+
+
+}
+async function subirActaMatriFol(archivo) {
+    try {
+        // Descargar el archivo original
+        const pdfBytes = await archivo.arrayBuffer();
+
+        // Descargar el fondo
+        const fondoPath = './assets/images/back.png';
+        const fondoBytes = await fetch(fondoPath).then(response => response.arrayBuffer());
+
+        // Agregar el fondo al PDF original
+        const modifiedPdfBytes = await addBackgroundImageToPdf(pdfBytes, fondoBytes);
+
+        // Buscar estados de México en el PDF
+        const foundStates = await buscarEstadosMexico(pdfBytes);
+
+        if (foundStates.length > 0) {
+            console.log('Estados de México encontrados:', foundStates);
+
+            // Usa el primer estado encontrado como nombre del archivo
+            const estado = `./pdf/PDF_estados/${foundStates[0]}.pdf`;
+            console.log(estado);
+            // Agrega una página con el nombre del estado al PDF
+            const pdfWithEstadoBytes = await agregarPaginaEstado(modifiedPdfBytes, estado);
+
+            if (pdfWithEstadoBytes) {
+                // Obtener el CURP del PDF
+                const wordList = await leerTextoPDF(pdfBytes);
+                if (wordList.length >= 6) {
+                    const curp = wordList[8]; // El índice 5 representa el elemento 6
+                    console.log('CURP:', curp);
+
+                    const identificador_electronico = wordList[22];
+                    const primeros_dos_digitos = identificador_electronico.substring(0, 2);
+                    const ultimos_siete_digitos = identificador_electronico.substring(identificador_electronico.length - 7);
+
+                    const identificador_modificado = "A" + primeros_dos_digitos + " " + ultimos_siete_digitos;
+                    const qrUrl = './assets/images/qr.png';
+                    const modifiedPdfBytes2 = await agregarQRyTexto(pdfWithEstadoBytes, qrUrl, curp);
+
+                    const codUrl = './assets/images/bc.png';
+                    const modifiedPdfBytes3 = await agregarCodigoyTexto(modifiedPdfBytes2, codUrl, identificador_modificado);
+
+                    // Convertir el PDF modificado con el estado en un Blob
+                    const modifiedBlob = new Blob([modifiedPdfBytes3], { type: 'application/pdf' });
+
+                    // Nombre del archivo PDF basado en el CURP
+                    const archivoName = curp + '.pdf';
+
+                    // Crear una referencia al lugar donde se guardará el archivo en Firebase
+                    var refStorage = firebase.storage().ref('Actas').child(archivoName);
+
+                    // Comienza la tarea de carga
+                    var uploadTask = refStorage.put(modifiedBlob);
+
+                    // Maneja el progreso y finalización de la carga
+                    uploadTask.on('state_changed',
+                        null,
+                        function (error) {
+                            console.log('Error al subir el archivo', error);
+                        },
+                        function () {
+                            console.log('Subida completada');
+                            mostrarMensajeFinal(uploadTask.snapshot.downloadURL, uploadTask.snapshot.totalBytes, curp);
+                            const elementoInfo = document.getElementById("info");
+                            // Cambia el contenido del elemento
+                            elementoInfo.textContent = curp;
+                        }
+                    );
+                } else {
+                    console.error('No se encontró el CURP en la lista de palabras.');
+                }
+            } else {
+                console.error('Error al agregar el nombre del estado al PDF.');
+            }
+        } else {
+            console.log('No se encontraron estados de México en el PDF.');
+        }
+    } catch (error) {
+        console.error('Error al procesar el archivo:', error);
+    }
+
+
+}
+
+async function subirActaMatriFol2(archivo) {
+    try {
+        // Descargar el archivo original
+        const pdfBytes = await archivo.arrayBuffer();
+
+        // Descargar el fondo
+        const fondoPath = './assets/images/back.png';
+        const fondoBytes = await fetch(fondoPath).then(response => response.arrayBuffer());
+
+        // Agregar el fondo al PDF original
+        const modifiedPdfBytes = await addBackgroundImageToPdf(pdfBytes, fondoBytes);
+
+        // Buscar estados de México en el PDF
+        const foundStates = await buscarEstadosMexico(pdfBytes);
+
+        if (foundStates.length > 0) {
+            console.log('Estados de México encontrados:', foundStates);
+
+            // Usa el primer estado encontrado como nombre del archivo
+            const estado = `./pdf/PDF_estados/${foundStates[0]}.pdf`;
+            console.log(estado);
+            // Agrega una página con el nombre del estado al PDF
+            const pdfWithEstadoBytes = await agregarPaginaEstado(modifiedPdfBytes, estado);
+
+            if (pdfWithEstadoBytes) {
+                // Obtener el CURP del PDF
+                const wordList = await leerTextoPDF(pdfBytes);
+                if (wordList.length >= 6) {
+                    const curp = wordList[8]; // El índice 5 representa el elemento 6
+                    console.log('CURP:', curp);
+
+                    const identificador_electronico = wordList[23];
+                    const primeros_dos_digitos = identificador_electronico.substring(0, 2);
+                    const ultimos_siete_digitos = identificador_electronico.substring(identificador_electronico.length - 7);
+
+                    const identificador_modificado = "A" + primeros_dos_digitos + " " + ultimos_siete_digitos;
+                    const qrUrl = './assets/images/qr.png';
+                    const modifiedPdfBytes2 = await agregarQRyTexto(pdfWithEstadoBytes, qrUrl, curp);
+
+                    const codUrl = './assets/images/bc.png';
+                    const modifiedPdfBytes3 = await agregarCodigoyTexto(modifiedPdfBytes2, codUrl, identificador_modificado);
+
+                    // Convertir el PDF modificado con el estado en un Blob
+                    const modifiedBlob = new Blob([modifiedPdfBytes3], { type: 'application/pdf' });
+
+                    // Nombre del archivo PDF basado en el CURP
+                    const archivoName = curp + '.pdf';
+
+                    // Crear una referencia al lugar donde se guardará el archivo en Firebase
+                    var refStorage = firebase.storage().ref('Actas').child(archivoName);
+
+                    // Comienza la tarea de carga
+                    var uploadTask = refStorage.put(modifiedBlob);
+
+                    // Maneja el progreso y finalización de la carga
+                    uploadTask.on('state_changed',
+                        null,
+                        function (error) {
+                            console.log('Error al subir el archivo', error);
+                        },
+                        function () {
+                            console.log('Subida completada');
+                            mostrarMensajeFinal(uploadTask.snapshot.downloadURL, uploadTask.snapshot.totalBytes, curp);
+                            const elementoInfo = document.getElementById("info");
+                            // Cambia el contenido del elemento
+                            elementoInfo.textContent = curp;
+                        }
+                    );
+                } else {
+                    console.error('No se encontró el CURP en la lista de palabras.');
+                }
+            } else {
+                console.error('Error al agregar el nombre del estado al PDF.');
+            }
+        } else {
+            console.log('No se encontraron estados de México en el PDF.');
+        }
+    } catch (error) {
+        console.error('Error al procesar el archivo:', error);
+    }
+
+
+}
+
+async function subirActaDivorFol(archivo) {
+    try {
+        // Descargar el archivo original
+        const pdfBytes = await archivo.arrayBuffer();
+
+        // Descargar el fondo
+        const fondoPath = './assets/images/back.png';
+        const fondoBytes = await fetch(fondoPath).then(response => response.arrayBuffer());
+
+        // Agregar el fondo al PDF original
+        const modifiedPdfBytes = await addBackgroundImageToPdf(pdfBytes, fondoBytes);
+
+        // Buscar estados de México en el PDF
+        const foundStates = await buscarEstadosMexico(pdfBytes);
+
+        if (foundStates.length > 0) {
+            console.log('Estados de México encontrados:', foundStates);
+
+            // Usa el primer estado encontrado como nombre del archivo
+            const estado = `./pdf/PDF_estados/${foundStates[0]}.pdf`;
+            console.log(estado);
+            // Agrega una página con el nombre del estado al PDF
+            const pdfWithEstadoBytes = await agregarPaginaEstado(modifiedPdfBytes, estado);
+
+            if (pdfWithEstadoBytes) {
+                // Obtener el CURP del PDF
+                const wordList = await leerTextoPDF(pdfBytes);
+                if (wordList.length >= 6) {
+                    const curp = wordList[9]; // El índice 5 representa el elemento 6
+                    console.log('CURP:', curp);
+
+                    const identificador_electronico = wordList[26];
+                    const primeros_dos_digitos = identificador_electronico.substring(0, 2);
+                    const ultimos_siete_digitos = identificador_electronico.substring(identificador_electronico.length - 7);
+
+                    const identificador_modificado = "A" + primeros_dos_digitos + " " + ultimos_siete_digitos;
+                    const qrUrl = './assets/images/qr.png';
+                    const modifiedPdfBytes2 = await agregarQRyTexto(pdfWithEstadoBytes, qrUrl, curp);
+
+                    const codUrl = './assets/images/bc.png';
+                    const modifiedPdfBytes3 = await agregarCodigoyTexto(modifiedPdfBytes2, codUrl, identificador_modificado);
+
+                    // Convertir el PDF modificado con el estado en un Blob
+                    const modifiedBlob = new Blob([modifiedPdfBytes3], { type: 'application/pdf' });
+
+                    // Nombre del archivo PDF basado en el CURP
+                    const archivoName = curp + '.pdf';
+
+                    // Crear una referencia al lugar donde se guardará el archivo en Firebase
+                    var refStorage = firebase.storage().ref('Actas').child(archivoName);
+
+                    // Comienza la tarea de carga
+                    var uploadTask = refStorage.put(modifiedBlob);
+
+                    // Maneja el progreso y finalización de la carga
+                    uploadTask.on('state_changed',
+                        null,
+                        function (error) {
+                            console.log('Error al subir el archivo', error);
+                        },
+                        function () {
+                            console.log('Subida completada');
+                            mostrarMensajeFinal(uploadTask.snapshot.downloadURL, uploadTask.snapshot.totalBytes, curp);
+                            const elementoInfo = document.getElementById("info");
+                            // Cambia el contenido del elemento
+                            elementoInfo.textContent = curp;
+                        }
+                    );
+                } else {
+                    console.error('No se encontró el CURP en la lista de palabras.');
+                }
+            } else {
+                console.error('Error al agregar el nombre del estado al PDF.');
+            }
+        } else {
+            console.log('No se encontraron estados de México en el PDF.');
+        }
+    } catch (error) {
+        console.error('Error al procesar el archivo:', error);
+    }
+
+
+}
+
+async function subirArchivoactfol2(archivo) {
+    try {
+        // Descargar el archivo original
+        const pdfBytes = await archivo.arrayBuffer();
+
+        // Descargar el fondo
+        const fondoPath = './assets/images/back.png';
+        const fondoBytes = await fetch(fondoPath).then(response => response.arrayBuffer());
+
+        // Agregar el fondo al PDF original
+        const modifiedPdfBytes = await addBackgroundImageToPdf(pdfBytes, fondoBytes);
+
+        // Buscar estados de México en el PDF
+        const foundStates = await buscarEstadosMexico(pdfBytes);
+
+        if (foundStates.length > 0) {
+            console.log('Estados de México encontrados:', foundStates);
+
+            // Usa el primer estado encontrado como nombre del archivo
+            const estado = `./pdf/PDF_estados/${foundStates[0]}.pdf`;
+            console.log(estado);
+            // Agrega una página con el nombre del estado al PDF
+            const pdfWithEstadoBytes = await agregarPaginaEstado(modifiedPdfBytes, estado);
+
+            if (pdfWithEstadoBytes) {
+                // Obtener el CURP del PDF
+                const wordList = await leerTextoPDF(pdfBytes);
+                if (wordList.length >= 6) {
+                    const curp = wordList[6]; // El índice 5 representa el elemento 6
+                    console.log('CURP:', curp);
+
+                    const identificador_electronico = wordList[27];
+                    const primeros_dos_digitos = identificador_electronico.substring(0, 2);
+                    const ultimos_siete_digitos = identificador_electronico.substring(identificador_electronico.length - 7);
+
+                    const identificador_modificado = "A" + primeros_dos_digitos + " " + ultimos_siete_digitos;
+                    const qrUrl = './assets/images/qr.png';
+                    const modifiedPdfBytes2 = await agregarQRyTexto(pdfWithEstadoBytes, qrUrl, curp);
+
+                    const codUrl = './assets/images/bc.png';
+                    const modifiedPdfBytes3 = await agregarCodigoyTexto(modifiedPdfBytes2, codUrl, identificador_modificado);
+
+                    // Convertir el PDF modificado con el estado en un Blob
+                    const modifiedBlob = new Blob([modifiedPdfBytes3], { type: 'application/pdf' });
+
+                    // Nombre del archivo PDF basado en el CURP
+                    const archivoName = curp + '.pdf';
+
+                    // Crear una referencia al lugar donde se guardará el archivo en Firebase
+                    var refStorage = firebase.storage().ref('Actas').child(archivoName);
+
+                    // Comienza la tarea de carga
+                    var uploadTask = refStorage.put(modifiedBlob);
+
+                    // Maneja el progreso y finalización de la carga
+                    uploadTask.on('state_changed',
+                        null,
+                        function (error) {
+                            console.log('Error al subir el archivo', error);
+                        },
+                        function () {
+                            console.log('Subida completada');
+                            mostrarMensajeFinal(uploadTask.snapshot.downloadURL, uploadTask.snapshot.totalBytes, curp);
+                            const elementoInfo = document.getElementById("info");
+                            // Cambia el contenido del elemento
+                            elementoInfo.textContent = curp;
+                        }
+                    );
+                } else {
+                    console.error('No se encontró el CURP en la lista de palabras.');
+                }
+            } else {
+                console.error('Error al agregar el nombre del estado al PDF.');
+            }
+        } else {
+            console.log('No se encontraron estados de México en el PDF.');
+        }
+    } catch (error) {
+        console.error('Error al procesar el archivo:', error);
+    }
+
+
+}
+
+
+// Función para subir el archivo
+async function subirArchivo(archivo) {
+    // Descargar el archivo original
+    const pdfBytes = await archivo.arrayBuffer();
+
+    // Descargar el fondo
+    const fondoPath = './assets/images/back.png';
+    const fondoBytes = await fetch(fondoPath).then(response => response.arrayBuffer());
+
+    // Agregar el fondo al PDF original
+    const modifiedPdfBytes = await addBackgroundImageToPdf(pdfBytes, fondoBytes);
+
+
+    leerTextoPDF(pdfBytes)
+        .then(wordList => {
+            console.log(wordList);
+            if (wordList.length >= 6) {
+                const curp = wordList[6]; // El índice 5 representa el elemento 6
+                console.log('CURP:', curp);
+                // Nombre del archivo con la fecha y hora en el formato especificado y "_con_fondo.pdf"
+                const archivoConFondoName = curp + '.pdf';
+
+
+                // Crear una referencia al lugar donde se guardará el archivo
+                var refStorage = firebase.storage().ref('Actas').child(archivoConFondoName);
+
+                // Convertir el PDF modificado en un Blob
+                const modifiedBlob = new Blob([modifiedPdfBytes], { type: 'application/pdf' });
+
+                // Comienza la tarea de carga
+                var uploadTask = refStorage.put(modifiedBlob);
+
+                // Maneja el progreso y finalización de la carga
+                uploadTask.on('state_changed',
+                    null,
+                    function (error) {
+                        console.log('Error al subir el archivo', error);
+                    },
+                    function () {
+                        console.log('Subida completada');
+                        mostrarMensajeFinal(uploadTask.snapshot.downloadURL, uploadTask.snapshot.totalBytes, curp);
+                        const elementoInfo = document.getElementById("info");
+
+                        // Cambia el contenido del elemento
+                        elementoInfo.textContent = curp;
+                    }
+                );
+            } else {
+                console.error('No se encontró el CURP en la lista de palabras.');
+            }
+        })
+        .catch(error => {
+            console.error('Error al leer el PDF:', error);
+        });
+
+
+
+}
+
+async function subirArchivo2(archivo) {
+    try {
+        // Descargar el archivo original
+        const pdfBytes = await archivo.arrayBuffer();
+
+        // Descargar el fondo
+        const fondoPath = './assets/images/back.png';
+        const fondoBytes = await fetch(fondoPath).then(response => response.arrayBuffer());
+
+        // Agregar el fondo al PDF original
+        const modifiedPdfBytes = await addBackgroundImageToPdf(pdfBytes, fondoBytes);
+
+        // Buscar estados de México en el PDF
+        const foundStates = await buscarEstadosMexico(pdfBytes);
+
+        if (foundStates.length > 0) {
+            console.log('Estados de México encontrados:', foundStates);
+
+            // Usa el primer estado encontrado como nombre del archivo
+            const estado = `./pdf/PDF_estados/${foundStates[0]}.pdf`;
+            console.log(estado);
+            // Agrega una página con el nombre del estado al PDF
+            const pdfWithEstadoBytes = await agregarPaginaEstado(modifiedPdfBytes, estado);
+
+            if (pdfWithEstadoBytes) {
+                // Obtener el CURP del PDF
+                const wordList = await leerTextoPDF(pdfBytes);
+                if (wordList.length >= 6) {
+                    const curp = wordList[6]; // El índice 5 representa el elemento 6
+                    console.log('CURP:', curp);
+                    const qrUrl = './assets/images/qr.png';
+                    const modifiedPdfBytes2 = await agregarQRyTexto(pdfWithEstadoBytes, qrUrl, curp);
+                    // Convertir el PDF modificado con el estado en un Blob
+                    const modifiedBlob = new Blob([modifiedPdfBytes2], { type: 'application/pdf' });
+
+                    // Nombre del archivo PDF basado en el CURP
+                    const archivoName = curp + '.pdf';
+
+                    // Crear una referencia al lugar donde se guardará el archivo en Firebase
+                    var refStorage = firebase.storage().ref('Actas').child(archivoName);
+
+                    // Comienza la tarea de carga
+                    var uploadTask = refStorage.put(modifiedBlob);
+
+                    // Maneja el progreso y finalización de la carga
+                    uploadTask.on('state_changed',
+                        null,
+                        function (error) {
+                            console.log('Error al subir el archivo', error);
+                        },
+                        function () {
+                            console.log('Subida completada');
+                            mostrarMensajeFinal(uploadTask.snapshot.downloadURL, uploadTask.snapshot.totalBytes, curp);
+                            const elementoInfo = document.getElementById("info");
+
+                        // Cambia el contenido del elemento
+                        elementoInfo.textContent = curp;
+                        }
+                    );
+                } else {
+                    console.error('No se encontró el CURP en la lista de palabras.');
+                }
+            } else {
+                console.error('Error al agregar el nombre del estado al PDF.');
+            }
+        } else {
+            console.log('No se encontraron estados de México en el PDF.');
+        }
+    } catch (error) {
+        console.error('Error al procesar el archivo:', error);
+    }
+}
+
+
+async function subirArchivodef(archivo) {
+    try {
+        // Descargar el archivo original
+        const pdfBytes = await archivo.arrayBuffer();
+
+        // Descargar el fondo
+        const fondoPath = './assets/images/back.png';
+        const fondoBytes = await fetch(fondoPath).then(response => response.arrayBuffer());
+
+        // Agregar el fondo al PDF original
+        const modifiedPdfBytes = await addBackgroundImageToPdf(pdfBytes, fondoBytes);
+
+        // Buscar estados de México en el PDF
+        const foundStates = await buscarEstadosMexico(pdfBytes);
+
+        if (foundStates.length > 0) {
+            console.log('Estados de México encontrados:', foundStates);
+
+            // Usa el primer estado encontrado como nombre del archivo
+            const estado = `./pdf/PDF_estados/${foundStates[0]}.pdf`;
+            console.log(estado);
+            // Agrega una página con el nombre del estado al PDF
+            const pdfWithEstadoBytes = await agregarPaginaEstado(modifiedPdfBytes, estado);
+
+            if (pdfWithEstadoBytes) {
+                // Obtener el CURP del PDF
+                const wordList = await leerTextoPDF(pdfBytes);
+                if (wordList.length >= 7) {
+                    const curp = wordList[7]; // El índice 5 representa el elemento 6
+                    console.log('CURP:', curp);
+                    const qrUrl = './assets/images/qr.png';
+                    const modifiedPdfBytes2 = await agregarQRyTexto(pdfWithEstadoBytes, qrUrl, curp);
+                    // Convertir el PDF modificado con el estado en un Blob
+                    const modifiedBlob = new Blob([modifiedPdfBytes2], { type: 'application/pdf' });
+
+                    // Nombre del archivo PDF basado en el CURP
+                    const archivoName = curp + '.pdf';
+
+                    // Crear una referencia al lugar donde se guardará el archivo en Firebase
+                    var refStorage = firebase.storage().ref('Actas').child(archivoName);
+
+                    // Comienza la tarea de carga
+                    var uploadTask = refStorage.put(modifiedBlob);
+
+                    // Maneja el progreso y finalización de la carga
+                    uploadTask.on('state_changed',
+                        null,
+                        function (error) {
+                            console.log('Error al subir el archivo', error);
+                        },
+                        function () {
+                            console.log('Subida completada');
+                            mostrarMensajeFinal(uploadTask.snapshot.downloadURL, uploadTask.snapshot.totalBytes, curp);
+                            const elementoInfo = document.getElementById("info");
+
+                        // Cambia el contenido del elemento
+                        elementoInfo.textContent = curp;
+                        }
+                    );
+                } else {
+                    console.error('No se encontró el CURP en la lista de palabras.');
+                }
+            } else {
+                console.error('Error al agregar el nombre del estado al PDF.');
+            }
+        } else {
+            console.log('No se encontraron estados de México en el PDF.');
+        }
+    } catch (error) {
+        console.error('Error al procesar el archivo:', error);
+    }
+}
+
+async function subirArchivodivor(archivo) {
+    try {
+        // Descargar el archivo original
+        const pdfBytes = await archivo.arrayBuffer();
+
+        // Descargar el fondo
+        const fondoPath = './assets/images/back.png';
+        const fondoBytes = await fetch(fondoPath).then(response => response.arrayBuffer());
+
+        // Agregar el fondo al PDF original
+        const modifiedPdfBytes = await addBackgroundImageToPdf(pdfBytes, fondoBytes);
+
+        // Buscar estados de México en el PDF
+        const foundStates = await buscarEstadosMexico(pdfBytes);
+
+        if (foundStates.length > 0) {
+            console.log('Estados de México encontrados:', foundStates);
+
+            // Usa el primer estado encontrado como nombre del archivo
+            const estado = `./pdf/PDF_estados/${foundStates[0]}.pdf`;
+            console.log(estado);
+            // Agrega una página con el nombre del estado al PDF
+            const pdfWithEstadoBytes = await agregarPaginaEstado(modifiedPdfBytes, estado);
+
+            if (pdfWithEstadoBytes) {
+                // Obtener el CURP del PDF
+                const wordList = await leerTextoPDF(pdfBytes);
+                if (wordList.length >= 9) {
+                    const curp = wordList[9]; // El índice 5 representa el elemento 6
+                    console.log('CURP:', curp);
+                    const qrUrl = './assets/images/qr.png';
+                    const modifiedPdfBytes2 = await agregarQRyTexto(pdfWithEstadoBytes, qrUrl, curp);
+                    // Convertir el PDF modificado con el estado en un Blob
+                    const modifiedBlob = new Blob([modifiedPdfBytes2], { type: 'application/pdf' });
+
+                    // Nombre del archivo PDF basado en el CURP
+                    const archivoName = curp + '.pdf';
+
+                    // Crear una referencia al lugar donde se guardará el archivo en Firebase
+                    var refStorage = firebase.storage().ref('Actas').child(archivoName);
+
+                    // Comienza la tarea de carga
+                    var uploadTask = refStorage.put(modifiedBlob);
+
+                    // Maneja el progreso y finalización de la carga
+                    uploadTask.on('state_changed',
+                        null,
+                        function (error) {
+                            console.log('Error al subir el archivo', error);
+                        },
+                        function () {
+                            console.log('Subida completada');
+                            mostrarMensajeFinal(uploadTask.snapshot.downloadURL, uploadTask.snapshot.totalBytes, curp);
+                            const elementoInfo = document.getElementById("info");
+
+                        // Cambia el contenido del elemento
+                        elementoInfo.textContent = curp;
+                        }
+                    );
+                } else {
+                    console.error('No se encontró el CURP en la lista de palabras.');
+                }
+            } else {
+                console.error('Error al agregar el nombre del estado al PDF.');
+            }
+        } else {
+            console.log('No se encontraron estados de México en el PDF.');
+        }
+    } catch (error) {
+        console.error('Error al procesar el archivo:', error);
+    }
+}
+
+async function subirArchivomatri(archivo) {
+    try {
+        // Descargar el archivo original
+        const pdfBytes = await archivo.arrayBuffer();
+
+        // Descargar el fondo
+        const fondoPath = './assets/images/back.png';
+        const fondoBytes = await fetch(fondoPath).then(response => response.arrayBuffer());
+
+        // Agregar el fondo al PDF original
+        const modifiedPdfBytes = await addBackgroundImageToPdf(pdfBytes, fondoBytes);
+
+        // Buscar estados de México en el PDF
+        const foundStates = await buscarEstadosMexico(pdfBytes);
+
+        if (foundStates.length > 0) {
+            console.log('Estados de México encontrados:', foundStates);
+
+            // Usa el primer estado encontrado como nombre del archivo
+            const estado = `./pdf/PDF_estados/${foundStates[0]}.pdf`;
+            console.log(estado);
+            // Agrega una página con el nombre del estado al PDF
+            const pdfWithEstadoBytes = await agregarPaginaEstado(modifiedPdfBytes, estado);
+
+            if (pdfWithEstadoBytes) {
+                // Obtener el CURP del PDF
+                const wordList = await leerTextoPDF(pdfBytes);
+                if (wordList.length >= 9) {
+                    const curp = wordList[9]; // El índice 5 representa el elemento 6
+                    console.log('CURP:', curp);
+                    const qrUrl = './assets/images/qr.png';
+                    const modifiedPdfBytes2 = await agregarQRyTexto(pdfWithEstadoBytes, qrUrl, curp);
+                    // Convertir el PDF modificado con el estado en un Blob
+                    const modifiedBlob = new Blob([modifiedPdfBytes2], { type: 'application/pdf' });
+
+                    // Nombre del archivo PDF basado en el CURP
+                    const archivoName = curp + '.pdf';
+
+                    // Crear una referencia al lugar donde se guardará el archivo en Firebase
+                    var refStorage = firebase.storage().ref('Actas').child(archivoName);
+
+                    // Comienza la tarea de carga
+                    var uploadTask = refStorage.put(modifiedBlob);
+
+                    // Maneja el progreso y finalización de la carga
+                    uploadTask.on('state_changed',
+                        null,
+                        function (error) {
+                            console.log('Error al subir el archivo', error);
+                        },
+                        function () {
+                            console.log('Subida completada');
+                            mostrarMensajeFinal(uploadTask.snapshot.downloadURL, uploadTask.snapshot.totalBytes, curp);
+                            const elementoInfo = document.getElementById("info");
+
+                        // Cambia el contenido del elemento
+                        elementoInfo.textContent = curp;
+                        }
+                    );
+                } else {
+                    console.error('No se encontró el CURP en la lista de palabras.');
+                }
+            } else {
+                console.error('Error al agregar el nombre del estado al PDF.');
+            }
+        } else {
+            console.log('No se encontraron estados de México en el PDF.');
+        }
+    } catch (error) {
+        console.error('Error al procesar el archivo:', error);
+    }
+}
+
+async function subirArchivoactfol(archivo) {
+    try {
+        // Descargar el archivo original
+        const pdfBytes = await archivo.arrayBuffer();
+
+        // Descargar el fondo
+        const fondoPath = './assets/images/back.png';
+        const fondoBytes = await fetch(fondoPath).then(response => response.arrayBuffer());
+
+        // Agregar el fondo al PDF original
+        const modifiedPdfBytes = await addBackgroundImageToPdf(pdfBytes, fondoBytes);
+
+        // Buscar estados de México en el PDF
+        const foundStates = await buscarEstadosMexico(pdfBytes);
+
+        if (foundStates.length > 0) {
+            console.log('Estados de México encontrados:', foundStates);
+
+            // Usa el primer estado encontrado como nombre del archivo
+            const estado = `./pdf/PDF_estados/${foundStates[0]}.pdf`;
+            console.log(estado);
+            // Agrega una página con el nombre del estado al PDF
+            const pdfWithEstadoBytes = await agregarPaginaEstado(modifiedPdfBytes, estado);
+
+            if (pdfWithEstadoBytes) {
+                // Obtener el CURP del PDF
+                const wordList = await leerTextoPDF(pdfBytes);
+                if (wordList.length >= 7) {
+                    const curp = wordList[7]; // El índice 5 representa el elemento 6
+                    console.log('CURP:', curp);
+                    const qrUrl = './assets/images/qr.png';
+                    const modifiedPdfBytes2 = await agregarQRyTexto(pdfWithEstadoBytes, qrUrl, curp);
+                    // Convertir el PDF modificado con el estado en un Blob
+                    const modifiedBlob = new Blob([modifiedPdfBytes2], { type: 'application/pdf' });
+
+                    // Nombre del archivo PDF basado en el CURP
+                    const archivoName = curp + '.pdf';
+
+                    // Crear una referencia al lugar donde se guardará el archivo en Firebase
+                    var refStorage = firebase.storage().ref('Actas').child(archivoName);
+
+                    // Comienza la tarea de carga
+                    var uploadTask = refStorage.put(modifiedBlob);
+
+                    // Maneja el progreso y finalización de la carga
+                    uploadTask.on('state_changed',
+                        null,
+                        function (error) {
+                            console.log('Error al subir el archivo', error);
+                        },
+                        function () {
+                            console.log('Subida completada');
+                            mostrarMensajeFinal(uploadTask.snapshot.downloadURL, uploadTask.snapshot.totalBytes, curp);
+                            const elementoInfo = document.getElementById("info");
+
+                        // Cambia el contenido del elemento
+                        elementoInfo.textContent = curp;
+                        }
+                    );
+                } else {
+                    console.error('No se encontró el CURP en la lista de palabras.');
+                }
+            } else {
+                console.error('Error al agregar el nombre del estado al PDF.');
+            }
+        } else {
+            console.log('No se encontraron estados de México en el PDF.');
+        }
+    } catch (error) {
+        console.error('Error al procesar el archivo:', error);
+    }
+}
+
+// Muestra un mensaje al finalizar la carga
+function mostrarMensajeFinal(url, bytes, archivoName) {
+    var elMensaje = document.getElementById('mensaje');
+    var textoMensaje = '<p></p>';
+     
+    textoMensaje += '<a target="_blank" class="ov-btn-slide-left" href="' + url + '">Descargar</a>';
+    //textoMensaje += '<div class="wrapper"><a href="' + url + '"><button >Descargar <span></span> <span></span> <span></span> <span></span> </button></a></div>';
+    
+    textoMensaje += '<br>';
+    document.getElementById("task-title").value = archivoName;
+    document.getElementById("task-description").value = url;
+
+
+    elMensaje.innerHTML = textoMensaje;
+
+
+
+}
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+        

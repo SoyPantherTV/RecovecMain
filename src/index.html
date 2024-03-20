@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="./assets/images/pdf.ico" type="image/x-icon">
+  <title>Recovec</title>
+  <!-- BOOSTRAP CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css">
+  <!-- Toastify CSS -->
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+  <link rel="stylesheet" href="./assets/js/main.js">
+  <link rel="stylesheet" href="./assets/css/style.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+
+
+  
+</head>
+
+<body>
+
+  
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+    <div class="container">
+      <a class="navbar-brand" href="#">Recovec</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+        aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav ms-auto">
+          <a class="nav-link logged-out" href="#" data-bs-toggle="modal" data-bs-target="#signinModal"><img style="width: 25px; height: 25px; margin-right: 10px;" src="./assets/images/login2.png" alt="img login">Iniciar sesion</a>
+          <!-- <a class="nav-link logged-out" href="#" data-bs-toggle="modal" data-bs-target="#signupModal">Registrarme</a> -->
+          <a class="nav-link logged-in" href="./pdfmaker.html" id="pdfcreator"> <img    class="navbar-logo" src="./assets/images/pdf.ico" alt="X">   Pdf creator</a>
+          <a class="nav-link logged-in" href="./database.html" id="database"><img    class="navbar-logo" src="./assets/images/anadir.png" alt="X">   Base de datos</a>
+          <a class="nav-link logged-in" href="index.html" id="logout"><img style="width: 25px; height: 25px; margin-right: 10px;" src="./assets/images/login2.png" alt="img login">Cerrar sesion</a>
+          
+
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container p-4">
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+        <ul class="list-group posts">
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Registro</h3>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body p-5">
+          <form id="signup-form">
+
+            <label for="email">Usuario:</label>
+            <input type="text" id="signup-email" class="form-control mb-3" placeholder="Escribe aqui tu email" required>
+
+            <label for="password">Clave:</label>
+            <input type="password" id="signup-password" class="form-control mb-3" placeholder="Escribe aqui una clave" required>
+
+            <button type="submit" class="btn btn-primary">Registrarme e ingresar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="signinModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalSignin"
+    aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Bienvenido de vuelta</h3>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="login-form">
+            <label for="email">Usuario:</label>
+            <input type="text" id="login-email" class="form-control mb-3" placeholder="Escribe aqui tu email" required>
+            <label for="password">Clave:</label>
+            <input type="password" id="login-password" class="form-control mb-3" placeholder="Escribe aqui tu clave" required>
+
+            <button type="submit" class="btn btn-primary">Iniciar sesion e ingresar</button>
+
+            <button type="button" class="btn btn-info" id="googleLogin"></button>
+            <button type="button" class="btn btn-primary" id="facebookLogin"></button>
+            <button type="button" class="btn btn-dark" id="githubLogin"></button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+ 
+<style>
+
+.navbar-logo {
+  width: 25px; /* Ancho de 20 píxeles */
+  height: auto; /* Altura ajustada automáticamente para mantener la proporción */
+  /* Otros estilos para la imagen del logo */
+ 
+  /* Otros estilos para el logo */
+}
+
+
+
+/*PORTADA - COVER*/
+
+main{
+    max-width: 1200px;
+    height: calc(100vh + 800px);
+    padding: 40px;
+    margin: auto;
+}
+
+.cover{
+    display: flex;
+    justify-content: center;
+    margin-top: 60px;
+}
+
+.text__information-cover{
+    width: 50%;
+}
+
+.text__information-cover h1{
+    font-size: 50px;
+}
+
+.text__information-cover p{
+    font-size: 18px;
+    margin-top: 40px;
+}
+
+.buttons__cover{
+    display: flex;
+    margin-top: 40px;
+}
+
+.btn__readMore-cover{
+    padding: 14px 40px;
+    border: none;
+    color: black;
+    font-weight: 500;
+    font-size: 16px;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: background 300ms;
+}
+
+.btn__readMore-cover:hover{
+    background: #E8E8E8;
+}
+
+.media__cover{
+    width: 50%;
+}
+
+.media__cover video{
+    width: 100%;
+    margin-top: -40px;
+}
+
+</style>
+<style>
+  /* Define la animación */
+  @keyframes moveH6 {
+    0% { transform: translateX(0); } /* Estado inicial */
+    50% { transform: translateX(20px); } /* Punto intermedio */
+    100% { transform: translateX(0); } /* Estado final */
+  }
+
+  /* Aplica la animación al encabezado h1 */
+  h6 {
+    animation: moveH6 3s infinite; /* 3 segundos de duración, infinitamente repetido */
+    font-family: 'Montserrat', sans-serif;
+  }
+</style>
+
+
+  <div class="cover">
+            
+    
+
+    <div class="media__cover">
+      
+        <video src="./assets/media/animacion_cover.webm" autoplay playinline loop muted preload="auto"></video>
+    </div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h6 style="text-align: center;">Recovec en mantenimiento por PantherTvCorp</h6>
+
+
+
+
+
+  <!-- SCRIPTS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Toastify js -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+  <script src="./assets/js/main.js" type="module"></script>
+  <script src="./assets/js/script.js" type="module"></script>
+</body>
+
+</html>

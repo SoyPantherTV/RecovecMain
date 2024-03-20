@@ -1,0 +1,286 @@
+*{
+    
+    text-align: center;
+}
+body {
+    
+    text-align: center;
+    
+    
+  }
+
+main{
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+    text-align: center;
+    
+}
+
+.title{
+    text-align: center;
+    margin-top: 80px;
+}
+
+.main-menu {
+    width: fit-content;
+    max-width: 1500px;
+    margin: auto;
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    
+}
+
+.main-menu a{
+    cursor: default;
+}
+
+.main-menu .option{
+    width: 200px;
+    height: 200px;
+    background: #f1f1f1;
+    margin: 20px;
+    padding: 20px;
+    text-align: center;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 300ms;
+}
+
+.main-menu .option:hover{
+    box-shadow: 10px 10px 0px 0px #42484d, 20px 20px #8d9196, 30px 30px 14px #d7dde4;
+    transform: translate(-5px, -5px);
+}
+
+.option img{
+    width: 40%;
+    margin-top: 30px;
+}
+
+.option h2{
+    font-size: 18px;
+    margin-top: 10px;
+    color: #46A2FD;
+}
+
+
+input[type="file"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 10px;
+    width: 80%;
+    box-sizing: border-box;
+    background-color: #8d9196;
+    color: #000000;
+    cursor: pointer;
+    white-space: normal;
+    text-align: center;
+    cursor: pointer;
+    text-align: center;
+    align-items: center;
+    
+    
+}
+
+/* Cambia el estilo cuando se pasa el ratón sobre el input */
+input[type="file"]:hover {
+    border-color: #ffffff;
+    color: #000000;
+    background: #46A2FD;
+    text-align: center;
+}
+
+.file-name{
+    color: #000000;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    font-weight: bold;
+    animation: rotate 3s infinite linear;
+    transition: color 0.3s ease; 
+    text-align: center;
+}
+.custom-button{
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #46A2FD;
+    color: #000000;
+    cursor: pointer;
+    white-space: normal;
+    text-align: center;
+    cursor: pointer;
+    
+   
+}
+
+p{
+    text-align: center;
+    text-decoration: solid;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+    white-space: normal;
+    
+}
+
+.mi-enlace-estilizado {
+        
+    cursor: pointer;
+    border: 1px solid #cccccc;
+    border-radius: 15px;
+    padding: 10px 10px;
+    margin: 5px;
+    background: #268b33;
+    display: inline-block;
+    color: #ffffff;
+    width: 50%;
+    text-decoration: none;
+
+}
+
+.mi-enlace-estilizado:hover {
+    background: #33a51c;
+    color: #ffffff;
+}
+
+.label:active {
+    background: #9fa1a0;
+
+}
+
+.label:invalid+span {
+    color: #000000;
+}
+
+.label:valid+span {
+    color: #ffffff;
+}
+
+label.label input[type="file"] {
+    position: absolute;
+    top: -1000px;
+}
+
+.label {
+    cursor: pointer;
+    border: 1px solid #cccccc;
+    border-radius: 15px;
+    padding: 5px 15px;
+    margin: 5px;
+    background: #26598b;
+    display: inline-block;
+    color: #ffffff;
+    width: 90%;
+}
+
+.label:hover {
+    background: #46A2FD;
+}
+
+.label:active {
+    background: #9fa1a0;
+}
+
+.label:invalid+span {
+    color: #000000;
+}
+
+.label:valid+span {
+    color: #ffffff;
+}
+
+/* Estilo para el interruptor */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 20px;
+}
+
+/* Estilo para el input oculto */
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* Estilo para la etiqueta del interruptor */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+}
+
+/* Estilo para el círculo deslizante */
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 2px;
+    bottom: 2px;
+    background-color: white;
+    transition: .4s;
+}
+
+/* Cambia el color del interruptor cuando está activado */
+.switch input:checked+.slider {
+    background-color: #2196F3;
+}
+
+/* Mueve el círculo deslizante cuando el interruptor está activado */
+.switch input:checked+.slider:before {
+    transform: translateX(20px);
+}
+
+/* Estilo para el menú desplegable */
+#estadoDropdown {
+    width: 200px;
+    /* Ancho del menú */
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    color: #333;
+    cursor: pointer;
+}
+
+/* Estilo para las opciones del menú */
+#estadoDropdown option {
+    padding: 5px;
+    font-size: 14px;
+    background-color: #fff;
+    color: #333;
+}
+
+/* Estilo para las opciones cuando se seleccionan */
+#estadoDropdown option:checked {
+    background-color: #007bff;
+    color: #fff;
+}
+ /* Estilo para el enlace con el id "miEnlace" */
+ #downloadLink {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: #ffffff;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+/* Cambio de color al pasar el mouse sobre el enlace */
+#downloadLink:hover {
+    background-color: #e74c3c;
+}
