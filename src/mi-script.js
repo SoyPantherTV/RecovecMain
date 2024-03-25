@@ -7,7 +7,7 @@
 async function obtenerDatosCURP() {
     try {
         const curpInput = document.getElementById('curp-input').value;
-        const apiUrl = `https://api.valida-curp.com.mx/curp/obtener_datos/?token=pruebas&curp=${curpInput}`;
+        const apiUrl = `https://api.valida-curp.com.mx/curp/obtener_datos/?token=124d01fe-c92c-4921-9f66-3ec4c1739e1d&curp=${curpInput}`;
 
         const response = await fetch(apiUrl, { method: 'GET' }); // Realizamos una solicitud GET
         if (!response.ok) {
@@ -19,7 +19,7 @@ async function obtenerDatosCURP() {
         const solicitante = data.response.Solicitante;
         const docProbatorio = data.response.DocProbatorio;
         
-
+        
 
 
 
