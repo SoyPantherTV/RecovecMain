@@ -28,6 +28,14 @@
   <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <!-- Bootstrap CSS CDN -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+     
+ 
+  <!-- Font Awesome JS -->
+  <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+  <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+
 
 </head>
 
@@ -119,102 +127,627 @@ main{
  <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
     <div class="container">
       <a class="navbar-brand" href="./index.html">Recovec</a>
-      <a  style="font-size:xx-small;" class="navbar-brand" href="./index.html">Update 215.1</a>
+      <a  style="font-size:xx-small;" class="navbar-brand" href="#">Update 225.0</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
         aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav ms-auto">
-            <a class="nav-link logged-in" href="#" id="database"><label class="switch"><input type="checkbox" id="switch2" onchange="mostrarOcultarDive()"><span class="slider round"></span></label>   Enviar a base</a>
-            <a class="nav-link logged-in" href="./database.html" id="database"><img    class="navbar-logo" src="./assets/images/anadir.png" alt="X">   Base de datos</a>
-          <a class="nav-link logged-in" href="index.html" id="logout"><img style="width: 25px; height: 25px; margin-right: 10px;" src="./assets/images/login2.png" alt="img login">Cerrar sesion</a>
-         
-
+            
+            <!-- <a class="nav-link logged-in" href="#" id="database"><label class="switch"><input style="margin-left: 8px;" type="checkbox" id="switch2" onchange="mostrarOcultarDive()"><span class="slider round"></span></label></a> -->
+            <!-- <a class="nav-link logged-in" href="index.html" id="logout"><img style="width: 25px; height: 25px; margin-right: 10px;" src="./assets/images/login2.png" alt="img login"></a> -->
+            
+            <button style="width: fit-content; height: fit-content; margin-right: 5px; margin-left: 50px;" type="button" id="sidebarCollapse" class="btn btn-primary">
+                <i class="fa fa-align-justify"></i>
+            </button>
         </div>
       </div>
     </div>
   </nav>
 
-  <div class="container p-4">
-    <div class="row">
-      <div class="col-md-6 offset-md-3">
-        <ul class="list-group posts">
-        </ul>
-      </div>
-    </div>
-  </div>
+  
+  <script>
+    // Función para activar el botón automáticamente
+    function activarBoton() {
+        document.getElementById('sidebarCollapse').click();
+    }
 
-  <!-- Modal -->
-  <div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          
-          </div>
-        <div class="modal-body p-5">
-          <form id="signup-form">
+    // Llama a la función cuando la página se carga
+    window.onload = activarBoton;
+</script>
 
+
+
+  <div class="wrapper">
+    <!-- Sidebar  -->
+    <nav id="sidebar">
+        <nav style="background-color: #fff; border: #000000; font-size: x-large;">
+            <p style="color: #007bff; font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;">Herramientas</p> 
+            <img style="width: 100%; height: 200px; margin-bottom: 2px;" src="./assets/images/logo_min.png" alt="">
+        </nav>       
+
+        <ul class="list-unstyled components">
            
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
+            
+            <li  class="active">
+                <a href="https://www.gob.mx/curp/" target="_blank"><i class="fas fa-search"></i> CURP</a>
+            </li>
+           
+            <li>
+                <a class="nav-link logged-in" href="./database.html" id="database"><img    class="navbar-logo" src="./assets/images/anadir.png" alt="X">   Base de datos</a>
+            </li>
+            <li>
+                <button style="padding: 8px; width: 100%; color: #fff;" class="btn" id="toggleButton"><img    class="navbar-logo" src="./assets/images/programacion.svg" alt="X">  Enviar a base</button>
+                <script>
+                    document.addEventListener("DOMContentLoaded", function() {
+                        const toggleButton = document.getElementById("toggleButton");
+                        const miDiv5 = document.getElementById("miDiv5");
+            
+                        // Estado inicial: el div está visible
+                        let isDivVisible = false;
+            
+                        // Función para alternar la visibilidad del div
+                        function toggleDiv() {
+                            if (isDivVisible) {
+                                miDiv5.style.display = "none";
+                            } else {
+                                miDiv5.style.display = "block";
+                            }
+                            isDivVisible = !isDivVisible;
+                        }
+            
+                        // Agregar evento de clic al botón
+                        toggleButton.addEventListener("click", toggleDiv);
+                    });
+                </script>
+            </li>
 
-  <div class="modal fade" id="signinModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalSignin"
-    aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
+            <li>
+                <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Opcion</a>
+                <ul class="collapse list-unstyled" id="homeSubmenu">
+                    <li>
+                        <a href="#">Opcion 1</a>
+                    </li>
+                    <li>
+                        <a href="#">Opcion 2</a>
+                    </li>
+                    <li>
+                        <a href="#">Opcion 3</a>
+                    </li>
+                </ul>
+            </li>
+
+            <li>
+                <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Opcion</a>
+                <ul class="collapse list-unstyled" id="pageSubmenu">
+                    <li>
+                        <a href="#">Opcion 1</a>
+                    </li>
+                    <li>
+                        <a href="#">Opcion 2</a>
+                    </li>
+                    <li>
+                        <a href="#">Opcion 3</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        
+
+        <ul class="list-unstyled CTAs">
+            <li>
+                
+                <a class="nav-link logged-in" href="index.html" id="logout"><img style="width: 25px; height: 25px; margin-right: 10px;" src="./assets/images/login2.png" alt="img login">Cerrar sesion</a>
+        
+            </li>
+            <li>
+                <a href="index.html" class="article">Volver</a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Page Content  -->
+    <div id="content">
+        <div class="container p-4">
+            <div class="row">
+              <div class="col-md-6 offset-md-3">
+                <ul class="list-group posts">
+                </ul>
+              </div>
             </div>
-        <div class="modal-body">
-          <form id="login-form">
-            
-            
+          </div>
+        
+          <!-- Modal -->
+          <div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  
+                  </div>
+                <div class="modal-body p-5">
+                  <form id="signup-form">
+        
+                   
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        
+          <div class="modal fade" id="signinModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalSignin"
+            aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                    </div>
+                <div class="modal-body">
+                  <form id="login-form">
+                    
+                    
+        
+                    <button type="button" class="btn btn-info" id="googleLogin"></button>
+                    <button type="button" class="btn btn-primary" id="facebookLogin"></button>
+                    <button type="button" class="btn btn-dark" id="githubLogin"></button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div> 
+      
 
-            <button type="button" class="btn btn-info" id="googleLogin"></button>
-            <button type="button" class="btn btn-primary" id="facebookLogin"></button>
-            <button type="button" class="btn btn-dark" id="githubLogin"></button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div> 
+                
+               
+          
 
-<body  style="align-items: center;">
+
+
+                <body  style="align-items: center;">
+
+                    
+
+
+
+                   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     
-    <form >
-        <div class="main-menu">
-        <a style="width: 50%; height: fit-content; align-items: center;" >
-            <div class="miDiv0" id="miDiv0">
-                <div style="width: 90%; height: fit-content; align-items: center;" class="option">
-                    <img style="width: 50px; height: 50px;" src="./assets/images/pdf.png" alt="">
-                    <p id="info" class="infocurpview" >Info</p> 
-                    <div style="width: 100%; align-items: center;"><h6 id="mensaje" class=""></h6></div>
+                    <form >
+                        <div class="main-menu">
+                        <a style="width: 50%; height: fit-content; align-items: center;" >
+                            <div class="miDiv0" id="miDiv0">
+                                <div style="width: 90%; height: fit-content; align-items: center;" class="option">
+                                    <img style="width: 50px; height: 50px;" src="./assets/images/pdf.png" alt="">
+                                    <p id="info" class="infocurpview" ></p> 
+                                    <p id="info2" class="infostateview" ></p> 
+                                    <p id="info3" class="infofolioview" ></p> 
+                                    <div style="width: 100%; align-items: center;"><h6 id="mensaje" class=""></h6></div>
+                                    
+                                   
+                                    
+                                </div>
+                            </div>
+                        </a>
+                        
+                    </form>
+                
+                
                    
+                
+                 
+                
+                
                     
-                </div>
+                    <main>
+                
+                       
+                
+                        <form>
+                            <div class="main-menu">
+                                <a>
+                                    <div class="miDiv" id="miDiv">
+                                        <div style="height: fit-content;" class="option">
+                                            <img src="./assets/images/pdfred2h.png" alt="">
+                                            <h6>Acta de nacimiento</h6>
+                                            <form action="/form/submit" method="get">
+                                                <label class="label">
+                                                    <input type="file" id="campoarchivo" required>
+                                                    <span onclick="subirArchivo()">1 Hoja</span>
+                
+                                                </label>
+                                                <label class="label">
+                                                    <input type="file" id="campoarchivo2" required>
+                                                    <span  onclick="subirArchivo2()">2 Hojas</span>
+                                                </label>
+                                                <label class="label">
+                                                    <input type="file" id="campoarchivactfol" required>
+                                                    <span  onclick="subirArchivoactfol()">2 Hojas + Folio</span>
+                                                </label>
+                                                <label class="label">
+                                                    <input type="file" id="campoarchivactfolBC" required>
+                                                    <span  onclick="subirArchivoactfolBC()">2 Hojas + Folio</span>
+                                                    <h6 style="font-size:xx-small;">BC</h6>
+                                                </label>
+                
+                                        </div>
+                                    </div>
+                                </a>
+                        </form>
+                
+                        <form>
+                            <a>
+                                <div class="miDiv2" id="miDiv2">
+                                    <div style="height: fit-content;" class="option">
+                                        <img src="./assets/images/pdfred2h.png" alt="">
+                                        <h6>Acta de defuncion</h6>
+                                        <form action="/form/submit" method="get">
+                                            <label class="label">
+                                                <input type="file" id="campoarchivodef" required>
+                                                <span onclick="subirArchivodef()">2 Hojas</span>
+                                            </label>
+                                            <label class="label">
+                                                <input type="file" id="campoarchivodef_fol" required>
+                                                <span onclick="subirActadefFol()">2 Hojas + Folio</span>
+                                            </label>
+                                            <label class="label">
+                                                <input type="file" id="campoarchivodef_folBC" required>
+                                                <span onclick="subirActadefFolBC()">2 Hojas + Folio</span>
+                                                <h6 style="font-size:xx-small;">BC</h6>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </a>
+                        </form>
+                
+                        <form>
+                            <a>
+                                <div class="miDiv3" id="miDiv3">
+                                    <div style="height: fit-content;" class="option">
+                                        <img src="./assets/images/pdfred2h.png" alt="">
+                                        <h6>Acta de divorcio</h6>
+                                        <form action="/form/submit" method="get">
+                                            <label class="label">
+                                                <input type="file" id="campoarchivodivor" required>
+                                                <span onclick="subirArchivodivor()">2 Hojas</span>
+                                            </label>
+                                            <label class="label">
+                                                <input type="file" id="campoarchivodivorfol" required>
+                                                <span onclick="subirActaDivorFol()">2 Hojas + Folio</span>
+                                            </label>
+                                            <label class="label">
+                                                <input type="file" id="campoarchivodivorfolBC" required>
+                                                <span onclick="subirActaDivorFolBC()">2 Hojas + Folio</span>
+                                                <h6 style="font-size:xx-small;">BC</h6>
+                                            </label>
+                                            
+                                        </div>
+                                    </div>
+                                </a>
+                        </form>
+                
+                        <form>
+                            <a>
+                                <div class="miDiv4" id="miDiv4">
+                                    <div style="height: fit-content;" class="option">
+                                        <img src="./assets/images/pdfred2h.png" alt="">
+                                        <h6>Acta de matrimonio</h6>
+                                        <form action="/form/submit" method="get">
+                                            <label class="label">
+                                                <input type="file" id="campoarchivomatri" required>
+                                                <span onclick="subirArchivomatri()">2 Hojas</span>
+                                            </label>
+                                            <label class="label">
+                                                <input type="file" id="campoarchivomatrifol" required>
+                                                <span onclick="subirActaMatriFol()">2 Hojas + Folio</span>
+                                            </label>
+                                            <label class="label">
+                                                <input type="file" id="campoarchivomatrifol2" required>
+                                                <span onclick="subirActaMatriFol2()">2 Hojas + Folio</span>
+                                                <h6 style="font-size:xx-small;">BC</h6>
+                                            </label>
+                                            <label class="label">
+                                                <input type="file" id="campoarchivomatrifol2BCS" required>
+                                                <span onclick="subirActaMatriFol2BCS()">2 Hojas + Folio</span>
+                                                <h6 style="font-size:xx-small;">BC SUR</h6>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </a>
+                        </form>
+                
+                    </main>
+                        
+                    
+                
+                
+                    <style>
+                        /* Estilo para el div */
+                        #miDiv5 {
+                            display: none; /* Por defecto, el div está oculto */
+                            
+                        }
+                    </style>
+                
+                        <div class="miDiv5" id="miDiv5" style="width: auto; height: auto; ">
+                            <div style="height: fit-content;" class="option">
+                                <img style="width: 35px; height: 35px;" src="./assets/images/download.png" alt="">
+                                <h1 class="h4">Inventario</h1>
+                
+                                <form id="task-form">
+                
+                                    <input type="text" id="task-title" class="form-control mb-3" class="My First Title"
+                                        placeholder="Curp" autofocus />
+                
+                
+                                    <textarea id="task-description" rows="1" class="form-control mb-3" placeholder="Url"
+                                        readonly></textarea>
+                
+                                    <button style="width: 100%;" class="btn btn-primary" id="btn-task-form">Guardar</button>
+                                </form>
+                            </div>
+                        </div>
+                    
+                
+                
+                
+                
+                
+                
             </div>
-        </a>
-        
-    </form>
-    <main>
+        </nav>
+ </div>
+</div>
+
+
+
+<style>
+    p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.1em;
+    font-weight: 300;
+    line-height: 1.7em;
+    color: #999;
+}
+
+a,
+a:hover,
+a:focus {
+    color: inherit;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.navbar {
+    padding: 15px 10px;
+    background: #fff;
+    border: none;
+    border-radius: 0;
+    margin-bottom: 40px;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-btn {
+    box-shadow: none;
+    outline: none !important;
+    border: none;
+}
+
+.line {
+    width: 100%;
+    height: 1px;
+    border-bottom: 1px dashed #ddd;
+    margin: 40px 0;
+}
+
+/* ---------------------------------------------------
+    SIDEBAR STYLE
+----------------------------------------------------- */
+
+.wrapper {
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+}
+
+#sidebar {
+    min-width: 250px;
+    max-width: 250px;
+    background: rgba(32, 31, 31, 0.678);
+    color: #fff;
+    transition: all 0.3s;
+    
+    
+}
+
+#sidebar.active {
+    margin-left: -250px;
+    
+}
+
+#sidebar .sidebar-header {
+    padding: 20px;
+   
+}
+
+#sidebar ul.components {
+    padding: 20px 0;
+    border-bottom: 1px solid #007bff;
+}
+
+#sidebar ul p {
+    color: #fff;
+    padding: 10px;
+}
+
+#sidebar ul li a {
+    padding: 10px;
+    font-size: 1.1em;
+    display: block;
+}
+
+#sidebar ul li a:hover {
+    color: #ffffff;
+    background: #007bff;
+}
+
+#sidebar ul li.active>a,
+a[aria-expanded="true"] {
+    color: #fff;
+    background: #007bff;
+}
+
+a[data-toggle="collapse"] {
+    position: relative;
+}
+
+.dropdown-toggle::after {
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+}
+
+ul ul a {
+    font-size: 0.9em !important;
+    padding-left: 30px !important;
+    background: #007bff;
+}
+
+ul.CTAs {
+    padding: 20px;
+}
+
+ul.CTAs a {
+    text-align: center;
+    font-size: 0.9em !important;
+    display: block;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+a.download {
+    background: #fff;
+    color: #007bff;
+}
+
+a.article,
+a.article:hover {
+    background: #007bff !important;
+    color: #fff !important;
+}
+
+/* ---------------------------------------------------
+    CONTENT STYLE
+----------------------------------------------------- */
+
+#content {
+    width: 100%;
+    padding: 20px;
+    min-height: 100vh;
+    transition: all 0.3s;
+}
+
+/* ---------------------------------------------------
+    MEDIAQUERIES
+----------------------------------------------------- */
+
+@media (max-width: 768px) {
+    #sidebar {
+        margin-left: -250px;
+    }
+    #sidebar.active {
+        margin-left: 0;
+    }
+    #sidebarCollapse span {
+        display: none;
+    }
+}
+</style>
+
+<script>
+    $(document).ready(function () {
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('active');
+            });
+        });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <style>
     .infocurpview{
-        
-    border: 1px solid #cccccc;
-    color: #000000;
-    width: 100%;
-    text-decoration: none;
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ; 
-    font-size: smaller;
+   
     }
     .infocurpview:hover {
         animation: moveinfocurpview 3s infinite; /* 3 segundos de duración, infinitamente repetido */
-    color: #186112;
+    color: #007bff;
+}
+.infostateview{
+   
+}
+.infostateview:hover {
+    animation: moveinfocurpview 3s infinite; /* 3 segundos de duración, infinitamente repetido */
+color: #007bff;
+}
+.infocurpview{
+   
+}
+.infofolioview:hover {
+    animation: moveinfofolioview 3s infinite; /* 3 segundos de duración, infinitamente repetido */
+color: #007bff;
 }
 
 
@@ -229,7 +762,38 @@ main{
     
 </style>
 
+<style>
+    /* Estilos para el campo de entrada */
+    .curp-input {
+        width: 50%;
+        height: fit-content;
+        padding: 2px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        margin-bottom: 10px;
+    }
+</style>
+<style>
 
+.curp-button {
+display: inline-block;
+width: 50%;
+padding: 10px 20px;
+font-size: 16px;
+background-color: #007bff;
+color: #fff;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+transition: background-color 0.3s ease;
+}
+
+.curp-button:hover {
+background-color: #0056b3;
+}
+</style>
 
        
         
@@ -356,144 +920,7 @@ main{
 
 
 
-        <form>
-            <div class="main-menu">
-                <a>
-                    <div class="miDiv" id="miDiv">
-                        <div style="height: fit-content;" class="option">
-                            <img src="./assets/images/pdfred2h.png" alt="">
-                            <h6>Acta de nacimiento</h6>
-                            <form action="/form/submit" method="get">
-                                <label class="label">
-                                    <input type="file" id="campoarchivo" required>
-                                    <span onclick="subirArchivo()">1 Hoja</span>
-
-                                </label>
-                                <label class="label">
-                                    <input type="file" id="campoarchivo2" required>
-                                    <span  onclick="subirArchivo2()">2 Hojas</span>
-                                </label>
-                                <label class="label">
-                                    <input type="file" id="campoarchivactfol" required>
-                                    <span  onclick="subirArchivoactfol()">2 Hojas + Folio</span>
-                                </label>
-                                <label class="label">
-                                    <input type="file" id="campoarchivactfolBC" required>
-                                    <span  onclick="subirArchivoactfolBC()">2 Hojas + Folio</span>
-                                    <h6 style="font-size:xx-small;">BC</h6>
-                                </label>
-
-                        </div>
-                    </div>
-                </a>
-        </form>
-
-        <form>
-            <a>
-                <div class="miDiv2" id="miDiv2">
-                    <div style="height: fit-content;" class="option">
-                        <img src="./assets/images/pdfred2h.png" alt="">
-                        <h6>Acta de defuncion</h6>
-                        <form action="/form/submit" method="get">
-                            <label class="label">
-                                <input type="file" id="campoarchivodef" required>
-                                <span onclick="subirArchivodef()">2 Hojas</span>
-                            </label>
-                            <label class="label">
-                                <input type="file" id="campoarchivodef_fol" required>
-                                <span onclick="subirActadefFol()">2 Hojas + Folio</span>
-                            </label>
-                            <label class="label">
-                                <input type="file" id="campoarchivodef_folBC" required>
-                                <span onclick="subirActadefFolBC()">2 Hojas + Folio</span>
-                                <h6 style="font-size:xx-small;">BC</h6>
-                            </label>
-                        </div>
-                    </div>
-                </a>
-        </form>
-
-        <form>
-            <a>
-                <div class="miDiv3" id="miDiv3">
-                    <div style="height: fit-content;" class="option">
-                        <img src="./assets/images/pdfred2h.png" alt="">
-                        <h6>Acta de divorcio</h6>
-                        <form action="/form/submit" method="get">
-                            <label class="label">
-                                <input type="file" id="campoarchivodivor" required>
-                                <span onclick="subirArchivodivor()">2 Hojas</span>
-                            </label>
-                            <label class="label">
-                                <input type="file" id="campoarchivodivorfol" required>
-                                <span onclick="subirActaDivorFol()">2 Hojas + Folio</span>
-                            </label>
-                            <label class="label">
-                                <input type="file" id="campoarchivodivorfolBC" required>
-                                <span onclick="subirActaDivorFolBC()">2 Hojas + Folio</span>
-                                <h6 style="font-size:xx-small;">BC</h6>
-                            </label>
-                            
-                        </div>
-                    </div>
-                </a>
-        </form>
-
-        <form>
-            <a>
-                <div class="miDiv4" id="miDiv4">
-                    <div style="height: fit-content;" class="option">
-                        <img src="./assets/images/pdfred2h.png" alt="">
-                        <h6>Acta de matrimonio</h6>
-                        <form action="/form/submit" method="get">
-                            <label class="label">
-                                <input type="file" id="campoarchivomatri" required>
-                                <span onclick="subirArchivomatri()">2 Hojas</span>
-                            </label>
-                            <label class="label">
-                                <input type="file" id="campoarchivomatrifol" required>
-                                <span onclick="subirActaMatriFol()">2 Hojas + Folio</span>
-                            </label>
-                            <label class="label">
-                                <input type="file" id="campoarchivomatrifol2" required>
-                                <span onclick="subirActaMatriFol2()">2 Hojas + Folio</span>
-                                <h6 style="font-size:xx-small;">BC</h6>
-                            </label>
-                            <label class="label">
-                                <input type="file" id="campoarchivomatrifol2BCS" required>
-                                <span onclick="subirActaMatriFol2BCS()">2 Hojas + Folio</span>
-                                <h6 style="font-size:xx-small;">BC SUR</h6>
-                            </label>
-                        </div>
-                    </div>
-                </a>
-        </form>
-
-    </main>
         
-    
-
-
-
-
-        <div class="miDiv5" id="miDiv5" style="display: none; width: auto; height: auto; ">
-            <div style="height: fit-content;" class="option">
-                <img style="width: 35px; height: 35px;" src="./assets/images/download.png" alt="">
-                <h1 class="h4">Inventario</h1>
-
-                <form id="task-form">
-
-                    <input type="text" id="task-title" class="form-control mb-3" class="My First Title"
-                        placeholder="Curp" autofocus />
-
-
-                    <textarea id="task-description" rows="1" class="form-control mb-3" placeholder="Url"
-                        readonly></textarea>
-
-                    <button style="width: 100%;" class="btn btn-primary" id="btn-task-form">Guardar</button>
-                </form>
-            </div>
-        </div>
 
         <script>
             function mostrarOcultarDive() {
@@ -521,7 +948,13 @@ main{
 
     
     <script src="./assets/js/main2.js" type="module"></script>
-    
+    <!-- jQuery CDN - Slim version (=without AJAX) -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<!-- Popper.JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+<!-- Bootstrap JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+
 </body>
 
 </html>
@@ -811,6 +1244,7 @@ async function buscarEstadosMexico(pdfBytes) {
 
     } catch (error) {
         console.error('Error al buscar estados de México en el PDF:', error);
+       
         return [];
     }
 }
@@ -919,19 +1353,35 @@ async function subirActadefFol(archivo) {
                         function () {
                             console.log('Subida completada');
                             mostrarMensajeFinal(uploadTask.snapshot.downloadURL, uploadTask.snapshot.totalBytes, curp);
+
                             const elementoInfo = document.getElementById("info");
                             // Cambia el contenido del elemento
-                            elementoInfo.textContent = curp;
+                            elementoInfo.textContent = ("CURP:   " + curp);
+
+                            const elementoInfo2 = document.getElementById("info2");
+                            // Cambia el contenido del elemento
+                            elementoInfo2.textContent = ("ESTADO:   " + foundStates);
+
+                            const elementoInfo3 = document.getElementById("info3");
+                            // Cambia el contenido del elemento
+                            elementoInfo3.textContent = ("FOLIO:   " + identificador_modificado);
+
+
                         }
                     );
                 } else {
                     console.error('No se encontró el CURP en la lista de palabras.');
+                    
                 }
             } else {
                 console.error('Error al agregar el nombre del estado al PDF.');
+                 
             }
         } else {
             console.log('No se encontraron estados de México en el PDF.');
+            const elementoInfo = document.getElementById("info");
+                            // Cambia el contenido del elemento
+                            elementoInfo.textContent = ("No se encontraron estados de México en el PDF.");
         }
     } catch (error) {
         console.error('Error al procesar el archivo:', error);
@@ -1003,7 +1453,16 @@ async function subirActadefFolBC(archivo) {
                             mostrarMensajeFinal(uploadTask.snapshot.downloadURL, uploadTask.snapshot.totalBytes, curp);
                             const elementoInfo = document.getElementById("info");
                             // Cambia el contenido del elemento
-                            elementoInfo.textContent = curp;
+                            elementoInfo.textContent = ("CURP:   " + curp);
+
+                            const elementoInfo2 = document.getElementById("info2");
+                            // Cambia el contenido del elemento
+                            elementoInfo2.textContent = ("ESTADO:   " + foundStates);
+
+                            const elementoInfo3 = document.getElementById("info3");
+                            // Cambia el contenido del elemento
+                            elementoInfo3.textContent = ("FOLIO:   " + identificador_modificado);
+                            
                         }
                     );
                 } else {
@@ -1014,6 +1473,9 @@ async function subirActadefFolBC(archivo) {
             }
         } else {
             console.log('No se encontraron estados de México en el PDF.');
+            const elementoInfo = document.getElementById("info");
+                            // Cambia el contenido del elemento
+                            elementoInfo.textContent = ("No se encontraron estados de México en el PDF.");
         }
     } catch (error) {
         console.error('Error al procesar el archivo:', error);
@@ -1087,7 +1549,16 @@ async function subirActaMatriFol(archivo) {
                             mostrarMensajeFinal(uploadTask.snapshot.downloadURL, uploadTask.snapshot.totalBytes, curp);
                             const elementoInfo = document.getElementById("info");
                             // Cambia el contenido del elemento
-                            elementoInfo.textContent = curp;
+                            elementoInfo.textContent = ("CURP:   " + curp);
+
+
+                            const elementoInfo2 = document.getElementById("info2");
+                            // Cambia el contenido del elemento
+                            elementoInfo2.textContent = ("ESTADO:   " + foundStates);
+
+                            const elementoInfo3 = document.getElementById("info3");
+                            // Cambia el contenido del elemento
+                            elementoInfo3.textContent = ("FOLIO:   " + identificador_modificado);
                         }
                     );
                 } else {
@@ -1098,6 +1569,9 @@ async function subirActaMatriFol(archivo) {
             }
         } else {
             console.log('No se encontraron estados de México en el PDF.');
+            const elementoInfo = document.getElementById("info");
+                            // Cambia el contenido del elemento
+                            elementoInfo.textContent = ("No se encontraron estados de México en el PDF.");
         }
     } catch (error) {
         console.error('Error al procesar el archivo:', error);
@@ -1171,7 +1645,15 @@ async function subirActaMatriFol2(archivo) {
                             mostrarMensajeFinal(uploadTask.snapshot.downloadURL, uploadTask.snapshot.totalBytes, curp);
                             const elementoInfo = document.getElementById("info");
                             // Cambia el contenido del elemento
-                            elementoInfo.textContent = curp;
+                            elementoInfo.textContent = ("CURP:   " + curp);
+
+                            const elementoInfo2 = document.getElementById("info2");
+                            // Cambia el contenido del elemento
+                            elementoInfo2.textContent = ("ESTADO:   " + foundStates);
+
+                            const elementoInfo3 = document.getElementById("info3");
+                            // Cambia el contenido del elemento
+                            elementoInfo3.textContent = ("FOLIO:   " + identificador_modificado);
                         }
                     );
                 } else {
@@ -1182,6 +1664,9 @@ async function subirActaMatriFol2(archivo) {
             }
         } else {
             console.log('No se encontraron estados de México en el PDF.');
+            const elementoInfo = document.getElementById("info");
+                            // Cambia el contenido del elemento
+                            elementoInfo.textContent = ("No se encontraron estados de México en el PDF.");
         }
     } catch (error) {
         console.error('Error al procesar el archivo:', error);
@@ -1254,7 +1739,15 @@ async function subirActaMatriFol2BCS(archivo) {
                             mostrarMensajeFinal(uploadTask.snapshot.downloadURL, uploadTask.snapshot.totalBytes, curp);
                             const elementoInfo = document.getElementById("info");
                             // Cambia el contenido del elemento
-                            elementoInfo.textContent = curp;
+                            elementoInfo.textContent = ("CURP:   " + curp);
+
+                            const elementoInfo2 = document.getElementById("info2");
+                            // Cambia el contenido del elemento
+                            elementoInfo2.textContent = ("ESTADO:   " + foundStates);
+
+                            const elementoInfo3 = document.getElementById("info3");
+                            // Cambia el contenido del elemento
+                            elementoInfo3.textContent = ("FOLIO:   " + identificador_modificado);
                         }
                     );
                 } else {
@@ -1265,6 +1758,9 @@ async function subirActaMatriFol2BCS(archivo) {
             }
         } else {
             console.log('No se encontraron estados de México en el PDF.');
+            const elementoInfo = document.getElementById("info");
+                            // Cambia el contenido del elemento
+                            elementoInfo.textContent = ("No se encontraron estados de México en el PDF.");
         }
     } catch (error) {
         console.error('Error al procesar el archivo:', error);
@@ -1336,7 +1832,15 @@ async function subirActaDivorFol(archivo) {
                             mostrarMensajeFinal(uploadTask.snapshot.downloadURL, uploadTask.snapshot.totalBytes, curp);
                             const elementoInfo = document.getElementById("info");
                             // Cambia el contenido del elemento
-                            elementoInfo.textContent = curp;
+                            elementoInfo.textContent = ("CURP:   " + curp);
+
+                            const elementoInfo2 = document.getElementById("info2");
+                            // Cambia el contenido del elemento
+                            elementoInfo2.textContent = ("ESTADO:   " + foundStates);
+
+                            const elementoInfo3 = document.getElementById("info3");
+                            // Cambia el contenido del elemento
+                            elementoInfo3.textContent = ("FOLIO:   " + identificador_modificado);
                         }
                     );
                 } else {
@@ -1347,6 +1851,9 @@ async function subirActaDivorFol(archivo) {
             }
         } else {
             console.log('No se encontraron estados de México en el PDF.');
+            const elementoInfo = document.getElementById("info");
+                            // Cambia el contenido del elemento
+                            elementoInfo.textContent = ("No se encontraron estados de México en el PDF.");
         }
     } catch (error) {
         console.error('Error al procesar el archivo:', error);
@@ -1419,7 +1926,15 @@ async function subirActaDivorFolBC(archivo) {
                             mostrarMensajeFinal(uploadTask.snapshot.downloadURL, uploadTask.snapshot.totalBytes, curp);
                             const elementoInfo = document.getElementById("info");
                             // Cambia el contenido del elemento
-                            elementoInfo.textContent = curp;
+                            elementoInfo.textContent = ("CURP:   " + curp);
+
+                            const elementoInfo2 = document.getElementById("info2");
+                            // Cambia el contenido del elemento
+                            elementoInfo2.textContent = ("ESTADO:   " + foundStates);
+
+                            const elementoInfo3 = document.getElementById("info3");
+                            // Cambia el contenido del elemento
+                            elementoInfo3.textContent = ("FOLIO:   " + identificador_modificado);
                         }
                     );
                 } else {
@@ -1430,6 +1945,9 @@ async function subirActaDivorFolBC(archivo) {
             }
         } else {
             console.log('No se encontraron estados de México en el PDF.');
+            const elementoInfo = document.getElementById("info");
+                            // Cambia el contenido del elemento
+                            elementoInfo.textContent = ("No se encontraron estados de México en el PDF.");
         }
     } catch (error) {
         console.error('Error al procesar el archivo:', error);
@@ -1502,7 +2020,15 @@ async function subirArchivoactfol2(archivo) {
                             mostrarMensajeFinal(uploadTask.snapshot.downloadURL, uploadTask.snapshot.totalBytes, curp);
                             const elementoInfo = document.getElementById("info");
                             // Cambia el contenido del elemento
-                            elementoInfo.textContent = curp;
+                            elementoInfo.textContent = ("CURP:   " + curp);
+
+                            const elementoInfo2 = document.getElementById("info2");
+                            // Cambia el contenido del elemento
+                            elementoInfo2.textContent = ("ESTADO:   " + foundStates);
+
+                            const elementoInfo3 = document.getElementById("info3");
+                            // Cambia el contenido del elemento
+                            elementoInfo3.textContent = ("FOLIO:   " + identificador_modificado);
                         }
                     );
                 } else {
@@ -1513,6 +2039,9 @@ async function subirArchivoactfol2(archivo) {
             }
         } else {
             console.log('No se encontraron estados de México en el PDF.');
+            const elementoInfo = document.getElementById("info");
+                            // Cambia el contenido del elemento
+                            elementoInfo.textContent = ("No se encontraron estados de México en el PDF.");
         }
     } catch (error) {
         console.error('Error al procesar el archivo:', error);
@@ -1566,7 +2095,14 @@ async function subirArchivo(archivo) {
                         const elementoInfo = document.getElementById("info");
 
                         // Cambia el contenido del elemento
-                        elementoInfo.textContent = curp;
+                        elementoInfo.textContent = ("CURP:   " + curp);
+                        const elementoInfo2 = document.getElementById("info2");
+                            // Cambia el contenido del elemento
+                            elementoInfo2.textContent = ("");
+
+                            const elementoInfo3 = document.getElementById("info3");
+                            // Cambia el contenido del elemento
+                            elementoInfo3.textContent = ("");
                     }
                 );
             } else {
@@ -1635,9 +2171,14 @@ async function subirArchivo2(archivo) {
                             console.log('Subida completada');
                             mostrarMensajeFinal(uploadTask.snapshot.downloadURL, uploadTask.snapshot.totalBytes, curp);
                             const elementoInfo = document.getElementById("info");
+                            // Cambia el contenido del elemento
+                            elementoInfo.textContent = ("CURP:   " + curp);
 
-                        // Cambia el contenido del elemento
-                        elementoInfo.textContent = curp;
+                            const elementoInfo2 = document.getElementById("info2");
+                            // Cambia el contenido del elemento
+                            elementoInfo2.textContent = ("ESTADO:   " + foundStates);
+
+                            
                         }
                     );
                 } else {
@@ -1648,6 +2189,9 @@ async function subirArchivo2(archivo) {
             }
         } else {
             console.log('No se encontraron estados de México en el PDF.');
+            const elementoInfo = document.getElementById("info");
+                            // Cambia el contenido del elemento
+                            elementoInfo.textContent = ("No se encontraron estados de México en el PDF.");
         }
     } catch (error) {
         console.error('Error al procesar el archivo:', error);
@@ -1709,9 +2253,17 @@ async function subirArchivodef(archivo) {
                             console.log('Subida completada');
                             mostrarMensajeFinal(uploadTask.snapshot.downloadURL, uploadTask.snapshot.totalBytes, curp);
                             const elementoInfo = document.getElementById("info");
+                            // Cambia el contenido del elemento
+                            elementoInfo.textContent = ("CURP:   " + curp);
 
-                        // Cambia el contenido del elemento
-                        elementoInfo.textContent = curp;
+                            const elementoInfo2 = document.getElementById("info2");
+                            // Cambia el contenido del elemento
+                            elementoInfo2.textContent = ("ESTADO:   " + foundStates);
+
+                            
+                            const elementoInfo3 = document.getElementById("info3");
+                            // Cambia el contenido del elemento
+                            elementoInfo3.textContent = ("");
                         }
                     );
                 } else {
@@ -1722,6 +2274,9 @@ async function subirArchivodef(archivo) {
             }
         } else {
             console.log('No se encontraron estados de México en el PDF.');
+            const elementoInfo = document.getElementById("info");
+                            // Cambia el contenido del elemento
+                            elementoInfo.textContent = ("No se encontraron estados de México en el PDF.");
         }
     } catch (error) {
         console.error('Error al procesar el archivo:', error);
@@ -1784,7 +2339,14 @@ async function subirArchivodivor(archivo) {
                             const elementoInfo = document.getElementById("info");
 
                         // Cambia el contenido del elemento
-                        elementoInfo.textContent = curp;
+                        elementoInfo.textContent = ("CURP:   " + curp);
+                        const elementoInfo2 = document.getElementById("info2");
+                            // Cambia el contenido del elemento
+                            elementoInfo2.textContent = ("ESTADO:   " + foundStates);
+
+                            const elementoInfo3 = document.getElementById("info3");
+                            // Cambia el contenido del elemento
+                            elementoInfo3.textContent = ("");
                         }
                     );
                 } else {
@@ -1795,6 +2357,9 @@ async function subirArchivodivor(archivo) {
             }
         } else {
             console.log('No se encontraron estados de México en el PDF.');
+            const elementoInfo = document.getElementById("info");
+                            // Cambia el contenido del elemento
+                            elementoInfo.textContent = ("No se encontraron estados de México en el PDF.");
         }
     } catch (error) {
         console.error('Error al procesar el archivo:', error);
@@ -1857,7 +2422,15 @@ async function subirArchivomatri(archivo) {
                             const elementoInfo = document.getElementById("info");
 
                         // Cambia el contenido del elemento
-                        elementoInfo.textContent = curp;
+                        elementoInfo.textContent = ("CURP:   " + curp);
+
+                        const elementoInfo2 = document.getElementById("info2");
+                            // Cambia el contenido del elemento
+                            elementoInfo2.textContent = ("ESTADO:   " + foundStates);
+
+                            const elementoInfo3 = document.getElementById("info3");
+                            // Cambia el contenido del elemento
+                            elementoInfo3.textContent = ("");
                         }
                     );
                 } else {
@@ -1868,6 +2441,9 @@ async function subirArchivomatri(archivo) {
             }
         } else {
             console.log('No se encontraron estados de México en el PDF.');
+            const elementoInfo = document.getElementById("info");
+                            // Cambia el contenido del elemento
+                            elementoInfo.textContent = ("No se encontraron estados de México en el PDF.");
         }
     } catch (error) {
         console.error('Error al procesar el archivo:', error);
@@ -1938,7 +2514,15 @@ async function subirArchivoactfol(archivo) {
                             mostrarMensajeFinal(uploadTask.snapshot.downloadURL, uploadTask.snapshot.totalBytes, curp);
                             const elementoInfo = document.getElementById("info");
                             // Cambia el contenido del elemento
-                            elementoInfo.textContent = curp;
+                            elementoInfo.textContent = ("CURP:   " + curp);
+
+                            const elementoInfo2 = document.getElementById("info2");
+                            // Cambia el contenido del elemento
+                            elementoInfo2.textContent = ("ESTADO:   " + foundStates);
+
+                            const elementoInfo3 = document.getElementById("info3");
+                            // Cambia el contenido del elemento
+                            elementoInfo3.textContent = ("FOLIO:   " + identificador_modificado);
                         }
                     );
                 } else {
@@ -1949,6 +2533,9 @@ async function subirArchivoactfol(archivo) {
             }
         } else {
             console.log('No se encontraron estados de México en el PDF.');
+            const elementoInfo = document.getElementById("info");
+                            // Cambia el contenido del elemento
+                            elementoInfo.textContent = ("No se encontraron estados de México en el PDF.");
         }
     } catch (error) {
         console.error('Error al procesar el archivo:', error);
@@ -1956,7 +2543,7 @@ async function subirArchivoactfol(archivo) {
 
 }
 
-//EDICION 03:42
+
 
 async function subirArchivoactfolBC(archivo) {
     try {
@@ -2022,7 +2609,15 @@ async function subirArchivoactfolBC(archivo) {
                             mostrarMensajeFinal(uploadTask.snapshot.downloadURL, uploadTask.snapshot.totalBytes, curp);
                             const elementoInfo = document.getElementById("info");
                             // Cambia el contenido del elemento
-                            elementoInfo.textContent = curp;
+                            elementoInfo.textContent = ("CURP:   " + curp);
+
+                            const elementoInfo2 = document.getElementById("info2");
+                            // Cambia el contenido del elemento
+                            elementoInfo2.textContent = ("ESTADO:   " + foundStates);
+
+                            const elementoInfo3 = document.getElementById("info3");
+                            // Cambia el contenido del elemento
+                            elementoInfo3.textContent = ("FOLIO:   " + identificador_modificado);
                         }
                     );
                 } else {
@@ -2033,6 +2628,9 @@ async function subirArchivoactfolBC(archivo) {
             }
         } else {
             console.log('No se encontraron estados de México en el PDF.');
+            const elementoInfo = document.getElementById("info");
+                            // Cambia el contenido del elemento
+                            elementoInfo.textContent = ("No se encontraron estados de México en el PDF.");
         }
     } catch (error) {
         console.error('Error al procesar el archivo:', error);
@@ -2060,4 +2658,13 @@ function mostrarMensajeFinal(url, bytes, archivoName) {
 }
 
 
+</script>
+
+
+
+<script>
+    function openPopup() {
+        // Abre la URL en una nueva ventana emergente
+        window.open("https://www.gob.mx/curp/", "_blank", "width=1280%,height=400");
+    }
 </script>
